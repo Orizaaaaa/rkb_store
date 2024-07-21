@@ -24,6 +24,7 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Transaction from './pages/admin/transaction';
 import DetailTransaction from './pages/admin/detailTransaction';
+import Customer from './pages/admin/customer';
 
 
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="/laporan-admin" element={<ReportAdmin />} />
             <Route path="/transaction-admin" element={<Transaction />} />
             <Route path="/transaction-admin/detail-transaction" element={<DetailTransaction />} />
+            <Route path="/customer-admin" element={<Customer />} />
             <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
             <Route path="/petugas-admin" element={<OfficerList />} />
             <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />

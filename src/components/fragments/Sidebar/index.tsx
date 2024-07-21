@@ -12,7 +12,7 @@ import { useDisclosure } from "@nextui-org/react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import animationLogout from "../../../assets/logoutAnimation.json";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { IoMdPricetags } from "react-icons/io";
+import { IoMdPeople, IoMdPricetags } from "react-icons/io";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -135,6 +135,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<MdOutlineAddShoppingCart size={19} />} title="Product" pathname="/laporan-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<FaMoneyBills size={19} />} title="Transaksi" pathname="/transaction-admin" />
+          <NavigationList icon={<IoMdPeople size={19} />} title="Customer" pathname="/customer-admin" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )
