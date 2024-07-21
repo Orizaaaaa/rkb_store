@@ -10,7 +10,7 @@ const Transaction = () => {
                 <div className=" rounded-full ">
                     <div className="grid ">
                         <div className="flex-col space-y-3 my-auto">
-                            <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Petugas </h1>
+                            <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Transaksi </h1>
                             <p className="text-gray-500 text-sm md:text-base" >Ini adalah halaman transaksi dimana anda dapat melihat transaksi online maupun online</p>
                         </div>
                     </div>
@@ -29,9 +29,9 @@ const Transaction = () => {
                     <TableRow key="1">
                         <TableCell>1</TableCell>
                         <TableCell>12112ASJKJ88</TableCell>
-                        <TableCell>Active</TableCell>
-                        <TableCell>Active</TableCell>
-                        <TableCell>Active</TableCell>
+                        <TableCell>5</TableCell>
+                        <TableCell>Di Proses</TableCell>
+                        <TableCell>online</TableCell>
                         <TableCell><ButtonPrimary className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
                     </TableRow>
 
