@@ -132,7 +132,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       return (
         <>
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-admin" />
-          <NavigationList icon={<MdOutlineAddShoppingCart size={19} />} title="Product" pathname="/laporan-admin" />
+          <NavigationList icon={<MdOutlineAddShoppingCart size={19} />} title="Product" pathname="/product-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
           <NavigationList icon={<FaMoneyBills size={19} />} title="Transaksi" pathname="/transaction-admin" />
           <NavigationList icon={<IoMdPeople size={19} />} title="Customer" pathname="/customer-admin" />

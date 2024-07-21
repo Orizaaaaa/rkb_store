@@ -12,7 +12,6 @@ import MyReportOfficer from './pages/officer/myReport';
 import SubmitReportAdmin from './pages/admin/submitReport';
 import DashboardAdmin from './pages/admin/dashboard';
 import CategoryAdmin from './pages/admin/category';
-import ReportAdmin from './pages/admin/report';
 import SubmitReportOfficer from './pages/officer/submitReport';
 import OfficerList from './pages/admin/officerList';
 import UnitKerjaAdmin from './pages/admin/unitKerja';
@@ -25,6 +24,7 @@ import { store } from './redux/store';
 import Transaction from './pages/admin/transaction';
 import DetailTransaction from './pages/admin/detailTransaction';
 import Customer from './pages/admin/customer';
+import ProductAdmin from './pages/admin/product';
 
 
 
@@ -59,7 +59,7 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={['admin']} />}>
             <Route path="/dashboard-admin" element={<DashboardAdmin />} />
             <Route path="/kategori-admin" element={<CategoryAdmin />} />
-            <Route path="/laporan-admin" element={<ReportAdmin />} />
+            <Route path="/product-admin" element={<ProductAdmin />} />
             <Route path="/transaction-admin" element={<Transaction />} />
             <Route path="/transaction-admin/detail-transaction" element={<DetailTransaction />} />
             <Route path="/customer-admin" element={<Customer />} />

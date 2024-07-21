@@ -10,7 +10,7 @@ import CardProduct from "../../../components/fragments/CardProduct/CardProduct"
 import { Link } from "react-router-dom"
 
 
-const ReportAdmin = () => {
+const ProductAdmin = () => {
     const [loading, setLoading] = useState(false)
     const [dataReport, setDataReport] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState("");
@@ -102,4 +102,4 @@ const ReportAdmin = () => {
     )
 }
 
-export default ReportAdmin
+export default ProductAdmin
