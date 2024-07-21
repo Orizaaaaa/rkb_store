@@ -134,7 +134,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-admin" />
           <NavigationList icon={<MdOutlineAddShoppingCart size={19} />} title="Product" pathname="/laporan-admin" />
           <NavigationList icon={<IoMdPricetags size={19} />} title="Kategori" pathname="/kategori-admin" />
-          <NavigationList icon={<FaMoneyBills size={19} />} title="Transaksi" pathname="/transaction" />
+          <NavigationList icon={<FaMoneyBills size={19} />} title="Transaksi" pathname="/transaction-admin" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )
