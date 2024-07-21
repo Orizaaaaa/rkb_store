@@ -1,29 +1,29 @@
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Card from '../../../components/elemets/card/Card'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { manusiaLaptop } from '../../../image'
-import { statusDashboard } from '../../../service/dashboard'
+// import { statusDashboard } from '../../../service/dashboard'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ChartData, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-interface Report {
-    Menunggu: number
-    Diproses: number
-    Selesai: number
-}
+// interface Report {
+//     Menunggu: number
+//     Diproses: number
+//     Selesai: number
+// }
 
 const DashboardAdmin = () => {
-    const [dataDashboard, setDataDashboard] = useState({} as Report);
+    // const [dataDashboard, setDataDashboard] = useState({} as Report);
     const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        setLoading(true)
-        statusDashboard((result: any) => {
-            setDataDashboard(result.data)
-            setLoading(false)
-        })
-    }, []);
+    // useEffect(() => {
+    //     setLoading(true)
+    //     statusDashboard((result: any) => {
+    //         setDataDashboard(result.data)
+    //         setLoading(false)
+    //     })
+    // }, []);
 
 
     //card
@@ -31,15 +31,15 @@ const DashboardAdmin = () => {
 
         {
             name: 'Menunggu',
-            value: dataDashboard.Menunggu
+            value: '5'
         },
         {
             name: 'Di Proses',
-            value: dataDashboard.Diproses
+            value: '9'
         },
         {
             name: 'Selesai',
-            value: dataDashboard.Selesai
+            value: '30'
         },
 
     ]
