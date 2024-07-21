@@ -1,7 +1,9 @@
 
+import { BsThreeDots } from 'react-icons/bs'
 import { formatTitle } from '../../../utils/helper'
-import CardLink from '../../elemets/card/CardLink'
 import { FaStar } from 'react-icons/fa6'
+import Card from '../../elemets/card/Card'
+import { Link } from 'react-router-dom'
 type Props = {
     location: string
     image: any
@@ -11,9 +13,12 @@ type Props = {
 
 const CardProduct = ({ location, image, title, price }: Props) => {
     return (
-        <CardLink to={`${location}`}  >
+        <Card padding='p-3' >
             <div className="images h-[150px] w-full">
-                <img className='rounded-lg w-full h-full' src={image} alt="jalan rusak" />
+                <Link to={`${location}`}>
+                    <img className='rounded-lg w-full h-full' src={image} alt="jalan rusak" />
+                </Link>
+
             </div>
             <div className=" mt-1 flex flex-col justify-between h-full">
                 <h1 className=' font-semibold text-base'>{formatTitle(title)}</h1>
@@ -21,9 +26,10 @@ const CardProduct = ({ location, image, title, price }: Props) => {
                 <div className="flex gap-2 items-center justify-end">
                     <FaStar size={17} color='#FFC107' />
                     <span className='text-gray-500 text-sm' >49 Terjual</span>
+                    <button><BsThreeDots size={20} /></button>
                 </div>
             </div>
-        </CardLink>
+        </Card >
     )
 }
 
