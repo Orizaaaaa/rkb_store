@@ -23,6 +23,7 @@ import PrivateRoute from './hooks/auth/PrivateRoute';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Transaction from './pages/admin/transaction';
+import DetailTransaction from './pages/admin/detailTransaction';
 
 
 
@@ -59,6 +60,7 @@ function App() {
             <Route path="/kategori-admin" element={<CategoryAdmin />} />
             <Route path="/laporan-admin" element={<ReportAdmin />} />
             <Route path="/transaction-admin" element={<Transaction />} />
+            <Route path="/transaction-admin/detail-transaction" element={<DetailTransaction />} />
             <Route path="/laporan-admin/submit-laporan-admin/:id" element={<SubmitReportAdmin />} />
             <Route path="/petugas-admin" element={<OfficerList />} />
             <Route path="/unit-kerja-admin" element={<UnitKerjaAdmin />} />

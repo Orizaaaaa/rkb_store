@@ -1,9 +1,12 @@
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
+import { useNavigate } from "react-router-dom";
 
 
 const Transaction = () => {
+    const navigate: any = useNavigate();
+
     return (
         <DefaultLayout>
             <div className="rounded-md  bg-white p-4 lg:px-7.5 lg:py-6 shadow-default dark:border-strokedark mb-4">
@@ -32,9 +35,8 @@ const Transaction = () => {
                         <TableCell>5</TableCell>
                         <TableCell>Di Proses</TableCell>
                         <TableCell>online</TableCell>
-                        <TableCell><ButtonPrimary className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                        <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
                     </TableRow>
-
                 </TableBody>
             </Table>
         </DefaultLayout>
