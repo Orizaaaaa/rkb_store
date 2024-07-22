@@ -158,6 +158,11 @@ const ProductAdmin = () => {
                         <InputReport marginY="my-0" htmlFor="stock" title="Jumlah Barang " type="number" onChange={handleChange} value={formData.stock} />
                         <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
                     </div>
+
+                    <label htmlFor="message" className="block mt-4 font-medium ">Deskripsi</label>
+                    <textarea id="message" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
+                     outline-none" placeholder="Write your thoughts here..."></textarea>
+
                     <h1 className=" font-medium mt-5" >Foto Product   </h1>
                     <div className="images ">
                         {formData.image && formData.image instanceof Blob ? (
