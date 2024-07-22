@@ -15,7 +15,7 @@ const ModalDefault = ({ isOpen, onClose, children, closeButton }: Props) => {
             onClose={onClose}
             isDismissable={false} isKeyboardDismissDisabled={true}
             hideCloseButton={closeButton}
-
+            scrollBehavior='outside'
         >
             <ModalContent>
                 <>

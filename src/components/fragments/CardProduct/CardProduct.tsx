@@ -9,9 +9,10 @@ type Props = {
     image: any
     title: string
     price: string
+    onClick?: any
 }
 
-const CardProduct = ({ location, image, title, price }: Props) => {
+const CardProduct = ({ location, image, title, price, onClick }: Props) => {
     return (
         <Card padding='p-3' >
             <div className="images h-[150px] w-full">
@@ -26,7 +27,7 @@ const CardProduct = ({ location, image, title, price }: Props) => {
                 <div className="flex gap-2 items-center justify-end">
                     <FaStar size={17} color='#FFC107' />
                     <span className='text-gray-500 text-sm' >49 Terjual</span>
-                    <button><BsThreeDots size={20} /></button>
+                    <button onClick={onClick} ><BsThreeDots size={20} /></button>
                 </div>
             </div>
         </Card >
