@@ -189,13 +189,13 @@ const ProductAdmin = () => {
                 <form >
                     <InputReport htmlFor="name" title="Nama Product " type="text" onChange={handleChange} value={formData.name} />
 
-                    <InputReport marginY="my-6" htmlFor="stock" title="Jumlah Barang " type="number" onChange={handleChange} value={formData.stock} />
-                    <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
-
-                    <div className="flex gap-2">
-                        <ButtonPrimary type="submit" className="w-full mt-5 rounded-md bg-red-500"  >Hapus Product</ButtonPrimary>
-                        <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                    <div className="flex gap-3">
+                        <InputReport marginY="my-0" htmlFor="stock" title="Jumlah Barang " type="number" onChange={handleChange} value={formData.stock} />
+                        <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
                     </div>
+
+                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+
 
                 </form>
             </ModalDefault>
