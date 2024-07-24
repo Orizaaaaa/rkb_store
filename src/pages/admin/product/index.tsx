@@ -139,7 +139,7 @@ const ProductAdmin = () => {
                     <CardLoading />
                 ) : (
 
-                    <CardProduct location="/laporan-admin/submit-laporan-admin/"
+                    <CardProduct location="/product-admin/detail-product-admin"
                         title="Jersey Arsenal "
                         price="Rp.250.000"
                         image={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'}

@@ -7,6 +7,9 @@ import 'leaflet/dist/images/marker-icon.png'
 import 'animate.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 AOS.init();
 import { BrowserRouter } from 'react-router-dom'
 import { NextUIProvider } from "@nextui-org/react";
