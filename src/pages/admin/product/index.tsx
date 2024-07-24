@@ -199,6 +199,10 @@ const ProductAdmin = () => {
                         <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
                     </div>
 
+                    <label htmlFor="message" className="block mt-4 font-medium ">Deskripsi</label>
+                    <textarea id="message" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
+                     outline-none" placeholder="Write your thoughts here..."></textarea>
+
                     <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
 
 

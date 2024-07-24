@@ -56,7 +56,7 @@ const DashboardAdmin = () => {
     }
 
     const data: ChartData<'line'> = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [
             {
                 label: 'Data Penjualan',
@@ -68,7 +68,7 @@ const DashboardAdmin = () => {
 
         ],
 
-    };
+    }
 
     const options: ChartOptions<'line'> = {
         responsive: true,
@@ -95,8 +95,7 @@ const DashboardAdmin = () => {
 
 
         },
-    };
-
+    }
 
 
     return (
@@ -119,7 +118,7 @@ const DashboardAdmin = () => {
                 {dataCard.map((item, index) => (
                     <>
                         {loading ? (
-                            <Card>
+                            <Card key={index}>
                                 <div role="status" className="max-w-sm animate-pulse flex-col justify-center items-center">
                                     <div className="h-4 bg-gray-300 rounded-md  max-w-[360px] mb-2.5"></div>
                                     <div className="h-7  w-7  bg-gray-300 rounded-md mb-4"></div>
@@ -137,7 +136,7 @@ const DashboardAdmin = () => {
             </div >
 
             <Card >
-                <Line data={data} options={options} height={90} />;
+                <Line data={data} options={options} height={90} />
             </Card>
 
 

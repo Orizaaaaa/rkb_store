@@ -49,9 +49,6 @@ function Footer() {
               <a href='#kategori'>
                 <div className='text-center text-base sm:text-lg text-white transition duration-200 hover:text-blue-600 md:text-start'>Kategori</div>
               </a>
-              <a href='#laporan'>
-                <div className='text-center text-base sm:text-lg text-white transition duration-200 hover:text-blue-600 md:text-start'>Laporan</div>
-              </a>
             </div>
           </div>
           <hr className='bg-white' />
