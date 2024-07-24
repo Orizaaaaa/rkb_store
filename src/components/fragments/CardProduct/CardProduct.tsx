@@ -27,7 +27,7 @@ const CardProduct = ({ location, image, title, price, onClick }: Props) => {
                 <div className="flex gap-2 items-center justify-end">
                     <FaStar size={17} color='#FFC107' />
                     <span className='text-gray-500 text-sm' >49 Terjual</span>
-                    <button onClick={onClick} ><BsThreeDots size={20} /></button>
+                    {onClick ? <button onClick={onClick} ><BsThreeDots size={20} /></button> : null}
                 </div>
             </div>
         </Card >

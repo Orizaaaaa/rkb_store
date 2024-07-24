@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllReport } from "../../../service/report";
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import CardProduct from "../../../components/fragments/CardProduct/CardProduct";
 
 
 const DashboardUser = () => {
 
-
+    const name = localStorage.getItem('name');
 
     const [dataReport, setDataReport] = useState([]);
 
@@ -47,8 +48,8 @@ const DashboardUser = () => {
             <Card>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="flex-col space-y-3 my-auto">
-                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard masyarakat !</h1>
-                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan membuat pengaduan yang bijak dan bermanfaat</p>
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard perbelanjaan {name} </h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan membeli kaos yang anda impikan</p>
                     </div>
                     <div className="flex justify-center">
                         <img src={manusiaLaptop} alt="dashboard" />
@@ -83,8 +84,12 @@ const DashboardUser = () => {
                 </Dropdown>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
-
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-3" >
+                <CardProduct location="/product-admin/detail-product-admin"
+                    title="Jersey Arsenal "
+                    price="Rp.250.000"
+                    image={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'}
+                />
             </div>
 
         </DefaultLayout >
