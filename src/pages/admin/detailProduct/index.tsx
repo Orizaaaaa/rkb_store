@@ -4,8 +4,14 @@ import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import ButtonPrimary from '../../../components/elemets/buttonPrimary';
+import { useDisclosure } from '@nextui-org/react';
+import ModalDefault from '../../../components/fragments/modal/Modal';
 
 const DetailProductAdmin = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const modalDelete = () => {
+        onOpen()
+    }
     return (
         <DefaultLayout>
             <div className="grid grid-cols-1 lg:grid-cols-2  gap-2">
@@ -45,10 +51,18 @@ const DetailProductAdmin = () => {
 
                     <h2 className='text-lg text-gray-500 my-2  ' > <span className='text-red-900 font-medium' >100</span>  Stock tersedia</h2>
                     <div className="flex justify-end mt-2">
-                        <ButtonPrimary className='bg-red-900 rounded-md' >DELETE PRODUCT</ButtonPrimary>
+                        <ButtonPrimary onClick={modalDelete} className='bg-red-900 rounded-md' >DELETE PRODUCT</ButtonPrimary>
                     </div>
 
                 </div>
+                <ModalDefault isOpen={isOpen} onClose={onClose} >
+                    <h1 className='text-lg font-medium' >Peringatan</h1>
+                    <p>Apakah anda yakin ingin menghapus produk ini ?</p>
+                    <div className="flex justify-end">
+                        <ButtonPrimary className='bg-red-900 rounded-md ' >YA</ButtonPrimary>
+                    </div>
+
+                </ModalDefault>
             </div>
         </DefaultLayout>
 
