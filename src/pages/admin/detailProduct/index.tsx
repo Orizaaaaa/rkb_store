@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import ButtonPrimary from '../../../components/elemets/buttonPrimary';
 import { useDisclosure } from '@nextui-org/react';
-import ModalDefault from '../../../components/fragments/modal/Modal';
+import AlertModal from '../../../components/fragments/modal/AlertModal';
 
 const DetailProductAdmin = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,14 +55,7 @@ const DetailProductAdmin = () => {
                     </div>
 
                 </div>
-                <ModalDefault isOpen={isOpen} onClose={onClose} >
-                    <h1 className='text-lg font-medium' >Peringatan</h1>
-                    <p>Apakah anda yakin ingin menghapus produk ini ?</p>
-                    <div className="flex justify-end">
-                        <ButtonPrimary className='bg-red-900 rounded-md ' >YA</ButtonPrimary>
-                    </div>
-
-                </ModalDefault>
+                <AlertModal isOpen={isOpen} onClose={onClose} />
             </div>
         </DefaultLayout>
 
