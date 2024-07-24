@@ -16,6 +16,7 @@ import DetailTransaction from './pages/admin/detailTransaction';
 import Customer from './pages/admin/customer';
 import ProductAdmin from './pages/admin/product';
 import DetailProductAdmin from './pages/admin/detailProduct';
+import AddProductAdmin from './pages/admin/addProduct';
 
 
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/dashboard-admin" element={<DashboardAdmin />} />
             <Route path="/kategori-admin" element={<CategoryAdmin />} />
             <Route path="/product-admin" element={<ProductAdmin />} />
+            <Route path="/product-admin/add-product" element={<AddProductAdmin />} />
             <Route path="/product-admin/detail-product-admin" element={<DetailProductAdmin />} />
             <Route path="/transaction-admin" element={<Transaction />} />
             <Route path="/transaction-admin/detail-transaction" element={<DetailTransaction />} />
