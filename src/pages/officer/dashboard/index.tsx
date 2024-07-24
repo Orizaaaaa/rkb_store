@@ -4,7 +4,6 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { manusiaLaptop } from "../../../image"
 import { getReportByUnitWork } from "../../../service/officer"
 import { useEffect, useState } from "react"
-import CardReport from "../../../components/fragments/CardReport/CardReport"
 
 
 const DashboardOfficer = () => {
@@ -46,11 +45,7 @@ const DashboardOfficer = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
 
-                {dataReport?.map((item: any, index: any) => (
-                    <CardReport location={`/dashboard-officer/submit-laporan-officer/${item._id}`}
-                        image={item.imageReport.map((item: any) => item)} title={item.title} address={item.address} status={item.status}
-                        date={item.createdAt} desc={item.description} key={index} />
-                ))}
+
 
             </div>
 

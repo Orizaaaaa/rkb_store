@@ -33,7 +33,7 @@ const Transaction = () => {
                         <TableCell>1</TableCell>
                         <TableCell>12112ASJKJ88</TableCell>
                         <TableCell>5</TableCell>
-                        <TableCell>Di Proses</TableCell>
+                        <TableCell>Selesai</TableCell>
                         <TableCell>online</TableCell>
                         <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
                     </TableRow>

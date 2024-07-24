@@ -72,6 +72,14 @@ const DashboardAdmin = () => {
 
     const options: ChartOptions<'line'> = {
         responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true,
+            },
+            y: {
+                beginAtZero: true,
+            },
+        },
         plugins: {
             legend: {
                 position: 'top',
