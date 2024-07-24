@@ -6,7 +6,7 @@ export const cloudApiKey = import.meta.env.VITE_CLOUDINARY_API_KEY
 export const cloudApiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET
 
 export const loginService = async (formLogin: any, callback: any) => {
-    await axios.post(`${url}/user/login`, formLogin)
+    await axios.post(`${url}/users/login`, formLogin)
         .then((res) => {
             callback(true, res.data);
         }).catch((err) => {
@@ -15,7 +15,7 @@ export const loginService = async (formLogin: any, callback: any) => {
 }
 
 export const register = async (formRegister: any, callback: any) => {
-    await axios.post(`${url}/user/register`, formRegister)
+    await axios.post(`${url}/users/register`, formRegister)
         .then((res) => {
             callback(true, res.data);
             console.log(res.data);

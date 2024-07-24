@@ -63,14 +63,15 @@ const Login = () => {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('email', res.data.email)
-                localStorage.setItem('name', res.data.name)
+
                 const loginTime = new Date().getTime();
                 localStorage.setItem('loginTime', loginTime.toString());
-
                 if (res.data.role === 'user') {
                     navigate('/dashboard-user')
+                    localStorage.setItem('name', res.data.username)
                 } else if (res.data.role === 'admin') {
                     navigate('/dashboard-admin')
+                    localStorage.setItem('name', 'admin')
                 } else if (res.data.role === 'officer') {
                     localStorage.setItem('idOfficer', res.data.id)
                     localStorage.setItem('id', res.data.unitWork.id)
