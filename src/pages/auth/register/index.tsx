@@ -16,6 +16,7 @@ const Register = () => {
         name: '',
         email: '',
         password: '',
+        address: '',
         role: 'user'
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,14 +79,20 @@ const Register = () => {
     return (
         <div className="register">
             <div className="container mx-auto flex justify-center items-center w-[100vw] h-[100vh]">
-                <form className='p-6 bg-[#F1FAEE] rounded-lg w-96 m-3 lg:m-0' onSubmit={handleSubmit} >
+                <form className='p-6 bg-[#F1FAEE] rounded-lg m-3 lg:m-0' onSubmit={handleSubmit} >
 
                     <div className="logo flex justify-center my-5">
                         <img className="h-24" src={logo} alt='logo' />
                     </div>
+                    <div className="flex gap-3">
+                        <InputForm placeholder='Masukkan Nama' type='text' htmlFor={'name'} value={form.name} onChange={handleChange} />
+                        <InputForm placeholder='Masukkan Email' type='email' htmlFor={'email'} value={form.email} onChange={handleChange} />
+                    </div>
 
-                    <InputForm placeholder='Masukkan Nama' type='text' htmlFor={'name'} value={form.name} onChange={handleChange} />
-                    <InputForm placeholder='Masukkan Email' type='email' htmlFor={'email'} value={form.email} onChange={handleChange} />
+                    <label htmlFor="message" className="block  font-medium " />
+                    <textarea id="message" className="block mb-3 text-black p-2.5 w-full text-sm  rounded-lg bg-white
+                     outline-none" placeholder="Alamat Lengkap"></textarea>
+
                     <div className="relative">
                         <button onClick={togglePassword} type='button' className='icon-password h-full  bg-transparent flex absolute right-0 justify-center items-center pe-4' >
                             {showPassword ? <FaEyeSlash size={20} color='#636363' /> : <IoEye size={20} color='#636363' />}

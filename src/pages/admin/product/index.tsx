@@ -161,7 +161,7 @@ const ProductAdmin = () => {
 
                     <label htmlFor="message" className="block mt-4 font-medium ">Deskripsi</label>
                     <textarea id="message" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
-                     outline-none" placeholder="Write your thoughts here..."></textarea>
+                     outline-none" placeholder="Tulis deskripsi..."></textarea>
 
                     <h1 className=" font-medium mt-5" >Foto Product   </h1>
                     <div className="images ">
@@ -201,7 +201,7 @@ const ProductAdmin = () => {
 
                     <label htmlFor="message" className="block mt-4 font-medium ">Deskripsi</label>
                     <textarea id="message" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
-                     outline-none" placeholder="Write your thoughts here..."></textarea>
+                     outline-none" placeholder="Tulis deskripsi ..."></textarea>
 
                     <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
 
