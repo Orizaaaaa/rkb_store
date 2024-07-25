@@ -13,6 +13,9 @@ const DashboardUser = () => {
 
     const name = localStorage.getItem('name');
 
+    // untuk dropdown
+    const [searchData, setSearchData] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState("");
     const [dataReport, setDataReport] = useState([]);
 
     useEffect(() => {
@@ -23,9 +26,7 @@ const DashboardUser = () => {
     }, []);
 
 
-    // untuk dropdown
-    const [searchData, setSearchData] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("");
+
 
 
     // const filteredData = dataReport.filter((item: any) => {
@@ -89,7 +90,7 @@ const DashboardUser = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-3" >
-                <CardProduct location="/product-admin/detail-product-admin"
+                <CardProduct location="/dashboard-user/detail-product"
                     title="Jersey Arsenal "
                     price="Rp.250.000"
                     image={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'}

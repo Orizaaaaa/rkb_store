@@ -17,6 +17,7 @@ import Customer from './pages/admin/customer';
 import ProductAdmin from './pages/admin/product';
 import DetailProductAdmin from './pages/admin/detailProduct';
 import AddProductAdmin from './pages/admin/addProduct';
+import DetailProductUser from './pages/user/detailProduct';
 
 
 
@@ -33,6 +34,7 @@ function App() {
           {/* Protected Routes for Users */}
           <Route element={<PrivateRoute allowedRoles={['user']} />}>
             <Route path="/dashboard-user" element={<DashboardUser />} />
+            <Route path="/dashboard-user/detail-product" element={<DetailProductUser />} />
           </Route>
 
           {/* Protected Routes for Officers */}
