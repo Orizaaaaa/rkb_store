@@ -32,9 +32,13 @@ export const statusChange = (value: string) => {
     }
 }
 
-export function formatRupiah(amount: number): string {
+export function formatRupiah(amount: number | undefined): string {
+    if (amount === undefined) {
+        return 'Rp 0';
+    }
     return 'Rp ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
+
 
 export function capitalizeWords(str: string): string {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');

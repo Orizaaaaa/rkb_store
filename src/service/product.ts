@@ -21,15 +21,15 @@ export const getAllProduct = (callback: any) => {
         });
 }
 
-// export const getReportById = (id: string, callback: any) => {
-//     axiosInterceptor.get(`/reports/${id}`)
-//         .then((res) => {
-//             callback(res.data);
-//         })
-//         .catch((error) => {
-//             console.error("Error fetching get report by id", error);
-//         });
-// }
+export const getDetailProduct = (id: string, callback: any) => {
+    axiosInterceptor.get(`/products/${id}`)
+        .then((res) => {
+            callback(res.data);
+        })
+        .catch((error) => {
+            console.error("Error fetching get product by id", error);
+        });
+}
 // export const assignReport = async (formData: any, callback: any) => {
 //     await axiosInterceptor.post('/reports/assign', formData)
 //         .then((result) => {
@@ -51,11 +51,11 @@ export const getAllProduct = (callback: any) => {
 // }
 
 
-// export const deleteReport = async (id: any, callback: any) => {
-//     await axiosInterceptor.delete(`/reports/${id}`)
-//         .then((result) => {
-//             callback(result.data)
-//         }).catch((err) => {
-//             console.log(err);
-//         });
-// }
+export const deleteProduct = async (id: any, callback: any) => {
+    await axiosInterceptor.delete(`/products/${id}`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}
