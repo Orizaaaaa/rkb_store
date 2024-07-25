@@ -6,14 +6,16 @@ import { useDisclosure } from "@nextui-org/react";
 import InputReport from "../../../components/elemets/input/InputReport";
 import { camera } from "../../../image";
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
-import { createCategory, getCategories } from "../../../service/category";
+import { createCategory, deleteCategory, getCategories } from "../../../service/category";
 import { postImage } from "../../../service/imagePost";
 import ModalDefault from "../../../components/fragments/modal/Modal";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import AlertModal from "../../../components/fragments/modal/AlertModal";
 
 
 const CategoryAdmin = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    // const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
+    const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
     const [category, setCategory] = useState([]);
 
     // form data untuk create category
@@ -22,8 +24,13 @@ const CategoryAdmin = () => {
         image: null as File | null
     });
 
-    //form data untuk delete category
-    const [dataDelete, setDataDelete] = useState('')
+    //get all category
+    useEffect(() => {
+        getCategories((result: any) => {
+            setCategory(result.data)
+        })
+    }, []);
+
 
 
     const handleChange = (e: any) => {
@@ -50,14 +57,6 @@ const CategoryAdmin = () => {
         }
     };
 
-    //get all category
-    useEffect(() => {
-        getCategories((result: any) => {
-            setCategory(result.data)
-        })
-    }, []);
-
-
 
     const handlecreateCategory = async (e: any) => {
         e.preventDefault()
@@ -80,29 +79,32 @@ const CategoryAdmin = () => {
 
     }
 
-    // const handleChangeId = (value: string) => {
-    //     setDataDelete(value)
-    // }
+
+    //form data untuk delete category
+    const [dataDelete, setDataDelete] = useState('')
+    const handleChangeId = (value: string) => {
+        setDataDelete(value)
+    }
 
     const handleAddCategory = () => {
         onOpen();
     }
-    // const handleDeleteModal = () => {
-    //     onWarningOpen();
-    // };
+    const handleDeleteModal = () => {
+        onWarningOpen();
+    };
 
-    // const confirmDelete = () => {
-    //     if (dataDelete) {
-    //         deleteCategory(dataDelete, (result: any) => {
-    //             console.log(result);
-    //             getCategories((result: any) => {
-    //                 setCategory(result.data);
-    //             });
-    //             setDataDelete('');
-    //             onWarningClose();
-    //         });
-    //     }
-    // };
+    const confirmDelete = () => {
+        if (dataDelete) {
+            deleteCategory(dataDelete, (result: any) => {
+                console.log(result);
+                getCategories((result: any) => {
+                    setCategory(result.data);
+                });
+                setDataDelete('');
+                onWarningClose();
+            });
+        }
+    };
 
 
 
@@ -125,14 +127,18 @@ const CategoryAdmin = () => {
                             <p className="text-sm md:text-base font-medium mt-4 text-center" >Tambah Kategori</p>
                         </div>
 
-                        <div className="image flex-col justify-center items-center  p-3 rounded-md " >
-                            <div className={`bg-[#f1faee] p-6 ${dataDelete === '2' ? 'border-2 border-primary rounded-md ' : ''}`}>
-                                <img className={`w-[100px] h-[100px] mx-auto rounded-md object-cover `}
-                                    src={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'} alt={'image kategori'} />
+                        {category.map((item: any, index: any) => (
+                            <div key={index} className="image flex-col justify-center items-center  p-3 rounded-md " >
+                                <div className={`bg-[#f1faee] p-6 relative ${dataDelete === item._id ? 'border-2 border-primary rounded-md ' : ''}`}>
+                                    <img onClick={() => handleChangeId(item._id)} className={`w-[100px] h-[100px] mx-auto rounded-md object-cover cursor-pointer `}
+                                        src={item.image} alt={'image kategori'} />
+                                    <button onClick={handleDeleteModal} className={`absolute top-0 right-0 p-1 ${dataDelete === item._id ? 'block' : 'hidden'}`} ><IoCloseCircleSharp color="red" size={20} /></button>
+                                </div>
+                                <p className="text-center" >{item.name}</p>
                             </div>
-                            <p className="text-sm md:text-base font-semibold mt-4 text-center">FOOTBAL JERSEY</p>
-                            <p className="text-sm md:text-base  text-gray-500  text-center">1000 Product Tersedia</p>
-                        </div>
+                        ))}
+
+
 
                     </div>
                 </Card>
@@ -170,14 +176,9 @@ const CategoryAdmin = () => {
 
 
                 {/* Warning Modal */}
-                {/* <ModalDefault isOpen={isWarningOpen} onClose={onWarningClose}>
-                    <h2 className="text-lg font-semibold">Peringatan</h2>
-                    <p> apakah Anda yakin ingin menghapus kategori ini?</p>
-                    <div className="flex justify-end gap-4 mt-4">
-                        <ButtonPrimary onClick={onWarningClose} className="bg-gray-300 text-black rounded-md">Batal</ButtonPrimary>
-                        <ButtonPrimary onClick={confirmDelete} className="bg-red-500 text-white rounded-md">Hapus</ButtonPrimary>
-                    </div>
-                </ModalDefault> */}
+                <AlertModal isOpen={isWarningOpen} onClose={onWarningClose} onClick={confirmDelete} >
+                    <p>Apakah anda yakin ingin menghapus kategori ini ?</p>
+                </AlertModal>
             </div>
         </DefaultLayout>
     )

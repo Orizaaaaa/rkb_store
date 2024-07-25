@@ -3,7 +3,7 @@ import { url } from "./auth"
 import { axiosInterceptor } from "./axiosInterceptor";
 
 export const getCategories = (callback: any) => {
-    axios.get(`${url}/category/list`)
+    axios.get(`${url}/categories/list`)
         .then((result) => {
             callback(result.data)
         }).catch((err) => {
@@ -13,7 +13,7 @@ export const getCategories = (callback: any) => {
 }
 
 export const deleteCategory = (id: any, callback: any) => {
-    axiosInterceptor.delete(`/category/${id}`)
+    axiosInterceptor.delete(`/categories/${id}`)
         .then((result) => {
             callback(result.data)
         }).catch((err) => {
@@ -22,7 +22,7 @@ export const deleteCategory = (id: any, callback: any) => {
 }
 
 export const createCategory = async (form: any, callback: any) => {
-    await axiosInterceptor.post('/category', form)
+    await axiosInterceptor.post('/categories', form)
         .then((result) => {
             callback(result.data)
         }).catch((err) => {
