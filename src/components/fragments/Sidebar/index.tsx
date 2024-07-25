@@ -6,7 +6,7 @@ import { RxDashboard } from "react-icons/rx";
 import { FaBookReader } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { logo2 } from "../../../image";
-import { FaBookOpen, FaMoneyBills } from "react-icons/fa6";
+import { FaMoneyBills } from "react-icons/fa6";
 import ModalDefault from "../modal/Modal";
 import { useDisclosure } from "@nextui-org/react";
 import { Player } from "@lottiefiles/react-lottie-player";
@@ -115,8 +115,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       return (
         <>
           <NavigationList icon={<RxDashboard size={19} />} title="Dasboard" pathname="/dashboard-user" />
-          <NavigationList icon={<FaBookReader size={19} />} title="Laporan Saya" pathname="/laporan-saya-user" />
-          <NavigationList icon={<FaBookOpen size={19} />} title="Semua Laporan" pathname="/semua-laporan-user" />
+          <NavigationList icon={<FaMoneyBills size={19} />} title="Transaksi Saya" pathname="/transaction-user" />
           <button className="border-2 border-[#2FACD6] py-1 rounded-md text-[#2FACD6] font-medium" onClick={handleLogout} >Logout</button>
         </>
       )

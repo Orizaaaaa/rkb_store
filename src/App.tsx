@@ -18,6 +18,8 @@ import ProductAdmin from './pages/admin/product';
 import DetailProductAdmin from './pages/admin/detailProduct';
 import AddProductAdmin from './pages/admin/addProduct';
 import DetailProductUser from './pages/user/detailProduct';
+import TransactionUser from './pages/user/transaction';
+import TransactionDetailUser from './pages/user/transactionDetail';
 
 
 
@@ -35,6 +37,8 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={['user']} />}>
             <Route path="/dashboard-user" element={<DashboardUser />} />
             <Route path="/dashboard-user/detail-product" element={<DetailProductUser />} />
+            <Route path="/transaction-user" element={<TransactionUser />} />
+            <Route path="/transaction-user/detail" element={<TransactionDetailUser />} />
           </Route>
 
           {/* Protected Routes for Officers */}
