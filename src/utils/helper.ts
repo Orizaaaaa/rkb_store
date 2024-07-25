@@ -32,14 +32,9 @@ export const statusChange = (value: string) => {
     }
 }
 
-
-export const parseCoordinate = (coord: string): number => {
-    const parsedCoord = parseFloat(coord);
-    if (isNaN(parsedCoord)) {
-        throw new Error(`Invalid coordinate value: ${coord}`);
-    }
-    return parsedCoord;
-};
+export function formatRupiah(amount: number): string {
+    return 'Rp ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
 
 export function capitalizeWords(str: string): string {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');

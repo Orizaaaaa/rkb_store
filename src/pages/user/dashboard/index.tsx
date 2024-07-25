@@ -3,7 +3,7 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { manusiaLaptop } from "../../../image"
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { getAllReport } from "../../../service/report";
+
 import CardProduct from "../../../components/fragments/CardProduct/CardProduct";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper/modules";
@@ -18,12 +18,12 @@ const DashboardUser = () => {
     const [selectedStatus, setSelectedStatus] = useState("");
     const [dataReport, setDataReport] = useState([]);
 
-    useEffect(() => {
-        getAllReport((result: any) => {
-            const data = result.data ? result.data.filter((report: any) => report.reporter.name === localStorage.getItem('name')) : [];
-            setDataReport(data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     getAllReport((result: any) => {
+    //         const data = result.data ? result.data.filter((report: any) => report.reporter.name === localStorage.getItem('name')) : [];
+    //         setDataReport(data);
+    //     });
+    // }, []);
 
 
 

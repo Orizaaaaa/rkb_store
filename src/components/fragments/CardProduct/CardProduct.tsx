@@ -17,7 +17,7 @@ const CardProduct = ({ location, image, title, price, onClick }: Props) => {
         <Card padding='p-3' >
             <div className="images h-[150px] w-full">
                 <Link to={`${location}`}>
-                    <img className='rounded-lg w-full h-full' src={image} alt="jalan rusak" />
+                    <img className='rounded-lg w-full h-full' src={image} alt="image" />
                 </Link>
 
             </div>
