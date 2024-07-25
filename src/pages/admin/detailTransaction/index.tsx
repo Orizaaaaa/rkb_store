@@ -5,7 +5,7 @@ import { jalanRusak } from "../../../image"
 const DetailTransaction = () => {
     return (
         <DefaultLayout>
-            <Card>
+            <Card >
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="left">
                         <div className="text">
