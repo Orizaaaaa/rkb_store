@@ -11,6 +11,8 @@ import InputReport from "../../../components/elemets/input/InputReport"
 
 const DetailProductUser = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const initialPrice = 200000; // Harga awal barang
+    const [totalPrice, setTotalPrice] = useState(initialPrice);
     const user_id = localStorage.getItem("user_id");
     const [errorMsg, setErrorMsg] = useState(" ")
     const [form, setForm] = useState({
@@ -28,7 +30,19 @@ const DetailProductUser = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
+        let newQuantity = form.quantity;
+
+        if (name === 'quantity') {
+            newQuantity = Number(value);
+        }
+
         setForm({ ...form, [name]: value });
+
+        if (name === 'quantity') {
+            const updatedPrice = initialPrice * newQuantity;
+            const priceWithTax = updatedPrice + (updatedPrice * 0.11);
+            setTotalPrice(priceWithTax);
+        }
     };
 
     const submitProduct = (e: any) => {
@@ -102,6 +116,8 @@ const DetailProductUser = () => {
 
                         </form>
                         <p className="text-red-500" >{errorMsg}</p>
+                        <h1 className=" text-end" >  Total Harga <i className="text-red-500" >sudah termasuk PPN 11% </i>  :   <u>Rp.{totalPrice.toLocaleString()}</u></h1>
+
                     </ModalDefault>
                 </div>
             </Card>
