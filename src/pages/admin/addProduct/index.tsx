@@ -45,8 +45,9 @@ const AddProductAdmin = () => {
         }));
     };
 
-    //image handle
+
     const handleAddProduct = () => {
+        //image handle
         postImagesArray({ images: formData.images }).then((urls) => {
             console.log(urls);
         })
