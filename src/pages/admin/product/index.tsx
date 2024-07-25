@@ -9,6 +9,7 @@ import ModalDefault from "../../../components/fragments/modal/Modal"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
 import InputReport from "../../../components/elemets/input/InputReport"
 import { formatRupiah } from "../../../utils/helper"
+import { Link } from "react-router-dom"
 
 
 const ProductAdmin = () => {
@@ -26,8 +27,6 @@ const ProductAdmin = () => {
         stock: '',
         image: null as File | null
     });
-
-
 
 
     const handleChange = (e: any) => {
@@ -62,9 +61,9 @@ const ProductAdmin = () => {
             </div>
 
             <div className="flex mt-4 gap-3">
-                <button className="bg-primary border-none text-white px-4 py-2 rounded-md " >
+                <Link to='/product-admin/add-product' className="bg-primary border-none text-white px-4 py-2 rounded-md " >
                     Tambah Product
-                </button>
+                </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-6 gap-3">

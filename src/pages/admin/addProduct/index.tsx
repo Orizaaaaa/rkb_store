@@ -7,6 +7,7 @@ import CaraoselImage from "../../../components/fragments/caraoselImage/CaraoselI
 import { SwiperSlide } from "swiper/react"
 import { IoCloseCircleOutline } from "react-icons/io5"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
+import { postImagesArray } from "../../../service/imagePost"
 
 const AddProductAdmin = () => {
     const [formData, setFormData] = useState({
@@ -44,7 +45,12 @@ const AddProductAdmin = () => {
         }));
     };
 
-    //image handle end
+    //image handle
+    const handleAddProduct = () => {
+        postImagesArray({ images: formData.images }).then((urls) => {
+            console.log(urls);
+        })
+    }
 
 
     return (
@@ -98,7 +104,7 @@ const AddProductAdmin = () => {
 
                 </div>
                 <div className="flex justify-end">
-                    <ButtonPrimary className="mt-5 rounded-md" >Buat Product</ButtonPrimary>
+                    <ButtonPrimary className="mt-5 rounded-md" onClick={handleAddProduct} >Buat Product</ButtonPrimary>
                 </div>
 
 
