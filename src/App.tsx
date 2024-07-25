@@ -21,7 +21,8 @@ import TransactionUser from './pages/user/transaction';
 import TransactionDetailUser from './pages/user/transactionDetail';
 import DashboardKasir from './pages/kasir/dashboard';
 import TransactionOfflineKasir from './pages/kasir/TransactionOffiline';
-import DetailTransactionKasir from './pages/kasir/detailTransaction';
+import CreateTransactionKasir from './pages/kasir/createTransaction';
+
 
 
 
@@ -47,7 +48,7 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={['kasir']} />}>
             <Route path="/dashboard-kasir" element={<DashboardKasir />} />
             <Route path="/transaction-offline-kasir" element={<TransactionOfflineKasir />} />
-            <Route path="/transaction-offline-kasir/detail-transaction" element={<DetailTransactionKasir />} />
+            <Route path="/transaction-offline-kasir/create-transaction" element={<CreateTransactionKasir />} />
           </Route>
 
           {/* Protected Routes for Admins */}

@@ -57,7 +57,7 @@ const TransactionOfflineKasir = () => {
 
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4  gap-3 my-4">
-                    <CardProduct location="/transaction-offline-kasir/detail-transaction"
+                    <CardProduct location="/transaction-offline-kasir/create-transaction"
                         title="Jersey Arsenal "
                         price="Rp.250.000"
                         image={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'}
