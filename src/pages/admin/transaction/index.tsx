@@ -2,10 +2,22 @@ import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from 
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllTransaction } from "../../../service/transaction";
 
 
 const Transaction = () => {
     const navigate: any = useNavigate();
+    const [transaction, setTransaction] = useState([]);
+
+    useEffect(() => {
+        getAllTransaction((result: any) => {
+            setTransaction(result.data)
+        })
+    }, []);
+
+    console.log(transaction);
+
 
     return (
         <DefaultLayout>
@@ -23,20 +35,25 @@ const Transaction = () => {
                 <TableHeader>
                     <TableColumn>NO</TableColumn>
                     <TableColumn>ID</TableColumn>
+                    <TableColumn>HARGA</TableColumn>
                     <TableColumn>JUMLAH</TableColumn>
                     <TableColumn>STATUS</TableColumn>
                     <TableColumn>TIPE TRANSAKSI</TableColumn>
                     <TableColumn>ACTION</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key="1">
-                        <TableCell>1</TableCell>
-                        <TableCell>12112ASJKJ88</TableCell>
-                        <TableCell>5</TableCell>
-                        <TableCell>Selesai</TableCell>
-                        <TableCell>online</TableCell>
-                        <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
-                    </TableRow>
+                    {transaction.map((item: any, index: number) => (
+                        <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{item._id}</TableCell>
+                            <TableCell>{item.grandtotal}</TableCell>
+                            <TableCell>{item.quantity}</TableCell>
+                            <TableCell>{item.status}</TableCell>
+                            <TableCell>{item.transaction_type}</TableCell>
+                            <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                        </TableRow>
+                    ))}
+
                 </TableBody>
             </Table>
         </DefaultLayout>
