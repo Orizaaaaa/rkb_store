@@ -2,27 +2,13 @@ import { IoSearch } from "react-icons/io5"
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { manusiaLaptop } from "../../../image"
-import { getReportByUnitWork } from "../../../service/officer"
-import { useEffect, useState } from "react"
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react"
+import ButtonPrimary from "../../../components/elemets/buttonPrimary"
+import { useNavigate } from "react-router-dom"
 
 
 const DashboardKasir = () => {
-
-    const [dataReport, setDataReport] = useState([])
-    const id: any = localStorage.getItem('id')
-
-    useEffect(() => {
-        getReportByUnitWork(id, (status: boolean, res: any) => {
-            if (status) {
-                setDataReport(res.data)
-            } else {
-                console.log(res);
-
-            }
-        })
-    }, []);
-
-    console.log(dataReport);
+    const navigate: any = useNavigate();
 
 
     return (
@@ -38,16 +24,35 @@ const DashboardKasir = () => {
                     </div>
                 </div>
             </Card >
-            <div className="w-full  mt-4 relative ">
-                <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik laporan..." name="" id="" />
+            <div className="w-full  my-4 relative ">
+                <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik nama pembeli ..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6  gap-3" >
+            <Table isStriped aria-label="Example static collection table ">
+                <TableHeader>
+                    <TableColumn>NO</TableColumn>
+                    <TableColumn>NAMA</TableColumn>
+                    <TableColumn>TIPE TRANSAKSI</TableColumn>
+                    <TableColumn>TOTAL HARGA</TableColumn>
+                    <TableColumn>JUMLAH</TableColumn>
+                    <TableColumn>STATUS</TableColumn>
 
 
-
-            </div>
+                    <TableColumn>ACTION</TableColumn>
+                </TableHeader>
+                <TableBody>
+                    <TableRow key="1">
+                        <TableCell>1</TableCell>
+                        <TableCell>Oriza Sativa</TableCell>
+                        <TableCell>online</TableCell>
+                        <TableCell>250.000</TableCell>
+                        <TableCell>5</TableCell>
+                        <TableCell>Belum Dibayar</TableCell>
+                        <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
 
         </DefaultLayout>
     )
