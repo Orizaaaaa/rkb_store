@@ -73,10 +73,9 @@ const Login = () => {
                 } else if (res.data.role === 'admin') {
                     navigate('/dashboard-admin')
                     localStorage.setItem('name', 'admin')
-                } else if (res.data.role === 'officer') {
-                    localStorage.setItem('idOfficer', res.data.id)
-                    localStorage.setItem('id', res.data.unitWork.id)
-                    navigate('/dashboard-officer')
+                } else if (res.data.role === 'kasir') {
+                    localStorage.setItem('name', res.data.username)
+                    navigate('/dashboard-kasir')
                 }
                 setLoading(false)
             } else {

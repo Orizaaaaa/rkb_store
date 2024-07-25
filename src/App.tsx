@@ -2,7 +2,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import DashboardUser from './pages/user/dashboard';
-import DashboardOfficer from './pages/officer/dashboard';
 import DashboardAdmin from './pages/admin/dashboard';
 import CategoryAdmin from './pages/admin/category';
 import Login from './pages/auth/login';
@@ -20,6 +19,7 @@ import AddProductAdmin from './pages/admin/addProduct';
 import DetailProductUser from './pages/user/detailProduct';
 import TransactionUser from './pages/user/transaction';
 import TransactionDetailUser from './pages/user/transactionDetail';
+import DashboardKasir from './pages/kasir/dashboard';
 
 
 
@@ -41,9 +41,9 @@ function App() {
             <Route path="/transaction-user/detail" element={<TransactionDetailUser />} />
           </Route>
 
-          {/* Protected Routes for Officers */}
-          <Route element={<PrivateRoute allowedRoles={['officer']} />}>
-            <Route path="/dashboard-officer" element={<DashboardOfficer />} />
+          {/* Protected Routes for kasir */}
+          <Route element={<PrivateRoute allowedRoles={['kasir']} />}>
+            <Route path="/dashboard-kasir" element={<DashboardKasir />} />
           </Route>
 
           {/* Protected Routes for Admins */}

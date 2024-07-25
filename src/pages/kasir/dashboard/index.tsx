@@ -6,7 +6,7 @@ import { getReportByUnitWork } from "../../../service/officer"
 import { useEffect, useState } from "react"
 
 
-const DashboardOfficer = () => {
+const DashboardKasir = () => {
 
     const [dataReport, setDataReport] = useState([])
     const id: any = localStorage.getItem('id')
@@ -30,8 +30,8 @@ const DashboardOfficer = () => {
             <Card>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="flex-col space-y-3 my-auto">
-                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard Unit Kerja !</h1>
-                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan mem proses pengaudan yang telah di ajukan admin</p>
+                        <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Selamat datang di dashboard Kasir</h1>
+                        <p className="text-gray-500 text-sm md:text-base" >Senang melihat Anda kembali. Mari kita mulai hari ini dengan mem proses pembelian pelanggan</p>
                     </div>
                     <div className="flex justify-center">
                         <img src={manusiaLaptop} alt="dashboard" />
@@ -53,4 +53,4 @@ const DashboardOfficer = () => {
     )
 }
 
-export default DashboardOfficer
+export default DashboardKasir
