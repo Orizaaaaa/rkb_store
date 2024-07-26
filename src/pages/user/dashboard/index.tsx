@@ -9,12 +9,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper/modules";
 import { getAllProduct } from "../../../service/product";
 import { getCategories } from "../../../service/category";
+import { formatRupiah } from "../../../utils/helper";
 
 
 const DashboardUser = () => {
-
     const name = localStorage.getItem('name');
-
     // untuk dropdown
     const [searchData, setSearchData] = useState("");
     const [categories, setCategories] = useState([]);
@@ -79,7 +78,6 @@ const DashboardUser = () => {
                                     <img className={`w-[100px] h-[100px] mx-auto rounded-md object-cover `}
                                         src={item.image} alt={'image kategori'} />
                                     <p className="text-sm md:text-base font-semibold mt-4 text-center">{item.name}</p>
-                                    <p className="text-sm md:text-base  text-gray-500  text-center">1000 Product Tersedia</p>
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -97,9 +95,9 @@ const DashboardUser = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-3" >
                 {filteredData.map((item: any, index: number) => (
-                    <CardProduct key={index} location="/dashboard-user/detail-product"
+                    <CardProduct key={index} location={`/dashboard-user/detail-product/${item._id}`}
                         title={item.title}
-                        price={item.price}
+                        price={formatRupiah(item.price)}
                         image={item.images?.[0]}
                     />
                 ))}

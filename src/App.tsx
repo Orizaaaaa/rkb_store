@@ -39,7 +39,7 @@ function App() {
           {/* Protected Routes for Users */}
           <Route element={<PrivateRoute allowedRoles={['user']} />}>
             <Route path="/dashboard-user" element={<DashboardUser />} />
-            <Route path="/dashboard-user/detail-product" element={<DetailProductUser />} />
+            <Route path="/dashboard-user/detail-product/:id" element={<DetailProductUser />} />
             <Route path="/transaction-user" element={<TransactionUser />} />
             <Route path="/transaction-user/detail" element={<TransactionDetailUser />} />
           </Route>
