@@ -78,8 +78,6 @@ const DetailProductAdmin = () => {
         onOpen()
     }
 
-    console.log(formData);
-
 
     const handleUpdateProduct = async (e: any) => {
         e.preventDefault();
