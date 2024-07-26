@@ -26,3 +26,11 @@ export const createTransaction = async (form: any, callback: any) => {
             console.log(err);
         });
 }
+export const getTransactionByUser = async (id: string, callback: any) => {
+    await axiosInterceptor.get(`/transactions/user/${id}`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}
