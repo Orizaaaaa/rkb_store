@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import CardProduct from "../../../components/fragments/CardProduct/CardProduct";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper/modules";
+import { getAllProduct } from "../../../service/product";
+import { getCategories } from "../../../service/category";
 
 
 const DashboardUser = () => {
@@ -15,30 +17,31 @@ const DashboardUser = () => {
 
     // untuk dropdown
     const [searchData, setSearchData] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("");
-    const [dataReport, setDataReport] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [product, setProduct] = useState([]);
 
-    // useEffect(() => {
-    //     getAllReport((result: any) => {
-    //         const data = result.data ? result.data.filter((report: any) => report.reporter.name === localStorage.getItem('name')) : [];
-    //         setDataReport(data);
-    //     });
-    // }, []);
+    useEffect(() => {
+        getAllProduct((result: any) => {
+            setProduct(result.data)
+        })
 
-
-
-
-
-    // const filteredData = dataReport.filter((item: any) => {
-    //     return (
-    //         item.title && item.title.toLowerCase().includes(searchData.toLowerCase()) &&
-    //         (selectedStatus === "" || item.status === selectedStatus)
-    //     );
-    // });
+        getCategories((result: any) => {
+            setCategories(result.data)
+        })
+    }, []);
 
     const handleSearch = (e: any) => {
         setSearchData(e.target.value);
     };
+
+    const filteredData = product.filter((item: any) => {
+        return (
+            item.title && item.title.toLowerCase().includes(searchData.toLowerCase()) &&
+            (selectedCategory === "" || item.category?._id === selectedCategory)
+        );
+    });
+
 
 
     return (
@@ -68,17 +71,20 @@ const DashboardUser = () => {
                     modules={[FreeMode, Pagination]}
                     className="mySwiper "
                 >
-                    <SwiperSlide>
-                        <div className="image flex-col justify-center items-center  p-3 rounded-md " style={{ pointerEvents: 'none' }}  >
-                            <div className="bg-[#f1faee] p-4 rounded-xl" >
-                                <img className={`w-[100px] h-[100px] mx-auto rounded-md object-cover `}
-                                    src={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'} alt={'image kategori'} />
-                                <p className="text-sm md:text-base font-semibold mt-4 text-center">FOOTBAL JERSEY</p>
-                                <p className="text-sm md:text-base  text-gray-500  text-center">1000 Product Tersedia</p>
-                            </div>
 
-                        </div>
-                    </SwiperSlide>
+                    {categories.map((item: any, index: any) => (
+                        <SwiperSlide key={index} className="cursor-pointer" onClick={() => setSelectedCategory(item._id)}>
+                            <div className="image flex-col justify-center items-center  p-3 rounded-md  " style={{ pointerEvents: 'none' }}  >
+                                <div className="bg-[#f1faee] p-4 rounded-xl " >
+                                    <img className={`w-[100px] h-[100px] mx-auto rounded-md object-cover `}
+                                        src={item.image} alt={'image kategori'} />
+                                    <p className="text-sm md:text-base font-semibold mt-4 text-center">{item.name}</p>
+                                    <p className="text-sm md:text-base  text-gray-500  text-center">1000 Product Tersedia</p>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+
 
                 </Swiper>
             </Card>
@@ -90,11 +96,13 @@ const DashboardUser = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-3" >
-                <CardProduct location="/dashboard-user/detail-product"
-                    title="Jersey Arsenal "
-                    price="Rp.250.000"
-                    image={'https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg'}
-                />
+                {filteredData.map((item: any, index: number) => (
+                    <CardProduct key={index} location="/dashboard-user/detail-product"
+                        title={item.title}
+                        price={item.price}
+                        image={item.images?.[0]}
+                    />
+                ))}
             </div>
 
         </DefaultLayout >

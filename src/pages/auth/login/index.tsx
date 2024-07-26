@@ -69,7 +69,7 @@ const Login = () => {
                 localStorage.setItem('loginTime', loginTime.toString());
                 if (res.data.role === 'user') {
                     navigate('/dashboard-user')
-                    localStorage.setItem('name', res.data.username)
+                    localStorage.setItem('name', res.data.username || 'pelanggan')
                 } else if (res.data.role === 'admin') {
                     navigate('/dashboard-admin')
                     localStorage.setItem('name', 'admin')
