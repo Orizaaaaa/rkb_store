@@ -18,7 +18,7 @@ const DetailTransaction = () => {
     const dataLetf = [
         {
             title: 'Nama Pembeli',
-            text: transaction?.user || 'User tidak di temukan'
+            text: transaction?.user?.username
         },
         {
             title: 'Nama Product',
@@ -37,6 +37,8 @@ const DetailTransaction = () => {
             text: formatRupiah(transaction?.grandtotal)
         },
     ]
+
+
 
 
     return (

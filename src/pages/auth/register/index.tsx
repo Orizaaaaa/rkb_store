@@ -13,7 +13,7 @@ const Register = () => {
     const [typePassword, setTypePassword] = useState("password")
     const [errorMsg, setErrorMsg] = useState(" ")
     const [form, setForm] = useState({
-        name: '',
+        username: '',
         email: '',
         password: '',
         address: '',
@@ -37,7 +37,7 @@ const Register = () => {
         const nameRegex = /^[A-Za-z\s\-\_\'\.\,\&\(\)]{1,100}$/; //validasi nama
         const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/ //validasi email
         const passwordRegex = /^[A-Za-z0-9]+$/ //validasi password
-        if (!nameRegex.test(form.name)) {
+        if (!nameRegex.test(form.username)) {
             setErrorMsg('*Masukan nama yang valid')
             setDisabled(false);
             setDisabled(true);
@@ -85,7 +85,7 @@ const Register = () => {
                         <img className="h-24" src={logo} alt='logo' />
                     </div>
                     <div className="flex gap-3">
-                        <InputForm placeholder='Masukkan Nama' type='text' htmlFor={'name'} value={form.name} onChange={handleChange} />
+                        <InputForm placeholder='Masukkan Nama' type='text' htmlFor={'username'} value={form.username} onChange={handleChange} />
                         <InputForm placeholder='Masukkan Email' type='email' htmlFor={'email'} value={form.email} onChange={handleChange} />
                     </div>
 
