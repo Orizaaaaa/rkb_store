@@ -15,7 +15,7 @@ const TransactionUser = () => {
             setTransaction(result.data)
         })
     }, []);
-    console.log(transaction);
+
 
     return (
         <DefaultLayout>
@@ -48,7 +48,7 @@ const TransactionUser = () => {
                             <TableCell>{item.quantity}</TableCell>
                             <TableCell>{item.status}</TableCell>
                             <TableCell>{item.transaction_type}</TableCell>
-                            <TableCell><ButtonPrimary onClick={() => navigate("/transaction-user/detail")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                            <TableCell><ButtonPrimary onClick={() => navigate(`/transaction-user/detail/${item._id}`)} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
                         </TableRow>
 
                     ))}

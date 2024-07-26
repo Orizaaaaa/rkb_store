@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera, jalanRusak } from "../../../image"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
+import { getDetailTransaction, updateTransaction } from "../../../service/transaction";
+import { useParams } from "react-router-dom";
+import { formatRupiah, statusText } from "../../../utils/helper";
 
 const TransactionDetailUser = () => {
+    const { id }: any = useParams();
+    const [detailTransaction, setDetailTransaction] = useState({} as any);
+
+    useEffect(() => {
+        getDetailTransaction(id, (result: any) => {
+            setDetailTransaction(result.data)
+        })
+    }, []);
+
     const [formData, setFormData] = useState({
-        name: '',
+        status: "Dibayar",
         image: null as File | null
     });
 
@@ -29,6 +41,16 @@ const TransactionDetailUser = () => {
         }
     };
 
+    // submit data gambar sudah berhasil tapi get payments docs nya belum 
+    const handleSubmit = () => {
+        updateTransaction(id, formData, (result: any) => {
+            console.log(result);
+        })
+
+    }
+    console.log(detailTransaction);
+
+
     // ini adalah contoh ketika data dari API ada atau tidak ada
     const contohImageAPI = false
     return (
@@ -38,34 +60,34 @@ const TransactionDetailUser = () => {
                     <div className="left">
                         <div className="text">
                             <h1 className="text-lg font-medium text-gray-500"> Nama Pembeli </h1>
-                            <p className="font-medium" >Oriza Sativa</p>
+                            <p className="font-medium" >{detailTransaction?.user?.username}</p>
                         </div>
                         <div className="text mt-4">
                             <h1 className="text-lg font-medium text-gray-500 "> Nama Product </h1>
-                            <p className="font-medium" >Sampah</p>
+                            <p className="font-medium" >{detailTransaction?.product?.title}</p>
                         </div>
                         <div className="text mt-4">
                             <h1 className="text-lg font-medium text-gray-500"> Alamat Email </h1>
-                            <p className="font-medium" >oryzasativacikal@gmail</p>
+                            <p className="font-medium" >{detailTransaction?.user?.email}</p>
                         </div>
                         <div className="text mt-4">
                             <h1 className="text-lg font-medium text-gray-500"> Kuantitas </h1>
-                            <p className="font-medium" >2</p>
+                            <p className="font-medium" >{detailTransaction?.quantity}</p>
                         </div>
                         <div className="text mt-4">
                             <h1 className="text-lg font-medium text-gray-500"> Jenis transaksi </h1>
-                            <p className="font-medium" >online</p>
+                            <p className="font-medium" >{detailTransaction?.transaction_type}</p>
                         </div>
                         <div className="text mt-4">
                             <h1 className="text-lg font-medium text-gray-500"> Harga </h1>
-                            <p className="font-medium" >Rp.250.000</p>
+                            <p className="font-medium" >{formatRupiah(detailTransaction.grandtotal)}</p>
                         </div>
                     </div>
 
                     <div className="right">
                         <div className="text">
                             <div className="status">
-                                <p className=" font-medium text-end md:mr-15 rounded-md text-orange-400" >Belum DIbayar </p>
+                                <p className={` font-medium text-end md:mr-15 rounded-md ${statusText(detailTransaction.status)}`} > {detailTransaction.status} </p>
                             </div>
                         </div>
 
@@ -96,7 +118,7 @@ const TransactionDetailUser = () => {
                                         <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                     </div>
                                 </div>
-                                <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                                <ButtonPrimary onClick={handleSubmit} className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
                             </>
                         )}
 
