@@ -13,26 +13,12 @@ import { Link } from "react-router-dom"
 
 
 const ProductAdmin = () => {
-    const { isOpen: isUpdateOpen, onOpen: onUpdateOpen, onClose: onUpdateClose } = useDisclosure();
     const [loading, setLoading] = useState(true)
     const [dataProduct, setDataProduct] = useState([]);
     const [searchData, setSearchData] = useState("");
 
     //form data untuk delete category
 
-    // form data untuk create category
-    const [formData, setFormData] = useState({
-        name: '',
-        price: '',
-        stock: '',
-        image: null as File | null
-    });
-
-
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
 
 
@@ -49,9 +35,7 @@ const ProductAdmin = () => {
     };
 
 
-    const updateModal = () => {
-        onUpdateOpen();
-    }
+
 
     return (
         <DefaultLayout>
@@ -75,31 +59,10 @@ const ProductAdmin = () => {
                             title={item.title}
                             price={formatRupiah(item.price)}
                             image={item.images[0]}
-                            onClick={updateModal}
                         />
                     ))
                 )}
             </div>
-
-            {/* update */}
-            <ModalDefault isOpen={isUpdateOpen} onClose={onUpdateClose} >
-                <form >
-                    <InputReport marginY="my-0" htmlFor="name" title="Nama Product " type="text" onChange={handleChange} value={formData.name} />
-
-                    <div className="flex gap-3">
-                        <InputReport marginY="my-0" htmlFor="stock" title="Jumlah Barang " type="number" onChange={handleChange} value={formData.stock} />
-                        <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
-                    </div>
-
-                    <label htmlFor="message" className="block mt-4 font-medium ">Deskripsi</label>
-                    <textarea id="message" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
-                     outline-none" placeholder="Tulis deskripsi ..."></textarea>
-
-                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
-
-
-                </form>
-            </ModalDefault>
 
 
         </DefaultLayout >

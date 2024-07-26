@@ -30,6 +30,17 @@ export const getDetailProduct = (id: string, callback: any) => {
             console.error("Error fetching get product by id", error);
         });
 }
+export const updateProduct = async (id: string, formData: any, callback: any) => {
+    await axiosInterceptor.put(`/products/${id}`, formData)
+        .then((res) => {
+            callback(res.data);
+        })
+        .catch((error) => {
+            console.error("Error updating product by id", error);
+        });
+};
+
+
 
 
 

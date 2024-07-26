@@ -9,8 +9,10 @@ import AlertModal from '../../../components/fragments/modal/AlertModal';
 import Card from '../../../components/elemets/card/Card';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { deleteProduct, getDetailProduct } from '../../../service/product';
+import { deleteProduct, getDetailProduct, updateProduct } from '../../../service/product';
 import { formatRupiah } from '../../../utils/helper';
+import ModalDefault from '../../../components/fragments/modal/Modal';
+import InputReport from '../../../components/elemets/input/InputReport';
 interface Product {
     _id: string;
     title: string;
@@ -26,10 +28,19 @@ interface Product {
 }
 
 const DetailProductAdmin = () => {
+    const { isOpen: isUpdateOpen, onOpen: onUpdateOpen, onClose: onUpdateClose } = useDisclosure();
     const { id }: any = useParams()
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
     const [dataProduct, setDataProduct] = useState<Product | null>(null);
+
+    // form data untuk update
+    const [formData, setFormData] = useState({
+        title: '',
+        price: 0,
+        stock: 0,
+        description: ''
+    } as any);
 
     //get
     useEffect(() => {
@@ -38,11 +49,13 @@ const DetailProductAdmin = () => {
         })
     }, []);
 
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
     //delete
-    const modalDelete = () => {
-        onOpen()
-    }
+
     const handleDeleteProduct = async () => {
         deleteProduct(id, (result: any) => {
             if (result) {
@@ -51,6 +64,45 @@ const DetailProductAdmin = () => {
             }
         })
     }
+
+    const updateModal = () => {
+        setFormData({
+            title: dataProduct?.title,
+            price: dataProduct?.price,
+            stock: dataProduct?.stock,
+            description: dataProduct?.description
+        })
+        onUpdateOpen();
+    }
+    const modalDelete = () => {
+        onOpen()
+    }
+
+    console.log(formData);
+
+
+    const handleUpdateProduct = async (e: any) => {
+        e.preventDefault();
+        const parsedFormData = {
+            ...formData,
+            price: parseFloat(formData.price),
+            stock: parseInt(formData.stock)
+        };
+        await updateProduct(id, parsedFormData, (result: any) => {
+            if (result) {
+                console.log(result);
+                onUpdateClose();
+                getDetailProduct(id, (result: any) => {
+                    setDataProduct(result.data);
+                });
+            }
+        });
+    };
+
+
+
+
+
 
     return (
         <DefaultLayout>
@@ -65,22 +117,6 @@ const DetailProductAdmin = () => {
                             modules={[Autoplay, Pagination, Navigation]}
                             className="mySwiper h-full rounded-lg"
                         >
-
-                            <SwiperSlide >
-                                <img
-                                    src="https://www.adidas.co.id/media/catalog/product/i/t/it6141_2_apparel_photography_front20center20view_grey.jpg"
-                                    className="w-full h-full "
-                                    style={{ pointerEvents: 'none' }}
-                                />
-                            </SwiperSlide>
-                            <SwiperSlide >
-                                <img
-                                    src="https://www.adidas.co.id/media/catalog/product/h/z/hz2106_2_apparel_photography_front20center20view_grey.jpg"
-                                    className="w-full h-full "
-                                    style={{ pointerEvents: 'none' }}
-                                />
-                            </SwiperSlide>
-
                             {dataProduct?.images.map((image, index) => (
                                 <SwiperSlide key={index}>
                                     <img
@@ -101,15 +137,38 @@ const DetailProductAdmin = () => {
                         <p>{dataProduct?.description}</p>
 
                         <h2 className='text-lg text-gray-500 my-2  ' > <span className='text-red-900 font-medium' >{dataProduct?.stock}</span>  Stock tersedia</h2>
-                        <div className="flex justify-end mt-2">
+                        <div className="flex gap-2 justify-end mt-2">
+                            <ButtonPrimary onClick={updateModal} className=' rounded-md'   >UPDATE PRODUCT</ButtonPrimary>
                             <ButtonPrimary onClick={modalDelete} className='bg-red-900 rounded-md' >DELETE PRODUCT</ButtonPrimary>
                         </div>
                     </div>
-                    <AlertModal isOpen={isOpen} onClose={onClose} onClick={handleDeleteProduct} >
-                        <p>Apakah anda yakin ingin menghapus produk ini ?</p>
-                    </AlertModal>
+
+
+
                 </div>
             </Card>
+            <AlertModal isOpen={isOpen} onClose={onClose} onClick={handleDeleteProduct} >
+                <p>Apakah anda yakin ingin menghapus produk ini ?</p>
+            </AlertModal>
+
+            {/* update */}
+            <ModalDefault isOpen={isUpdateOpen} onClose={onUpdateClose} >
+                <h1 className="text-lg font-semibold my-4 text-center" >UPDATE PRODUCT</h1>
+                <form onSubmit={handleUpdateProduct} >
+                    <InputReport marginY="my-0" htmlFor="title" title="Nama Product " type="text" onChange={handleChange} value={formData.title} />
+
+                    <div className="flex gap-3 mt-3">
+                        <InputReport marginY="my-0" htmlFor="stock" title="Jumlah Barang " type="number" onChange={handleChange} value={formData.stock} />
+                        <InputReport marginY="my-0" htmlFor="price" title="Harga Barang " type="number" onChange={handleChange} value={formData.price} />
+                    </div>
+
+                    <label htmlFor="description" className="block mt-4 font-medium ">Deskripsi</label>
+                    <textarea onChange={handleChange} value={formData.description} name="description" className="block mt-3 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
+                     outline-none" placeholder="Tulis deskripsi ..."></textarea>
+
+                    <ButtonPrimary type="submit" className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>
+                </form>
+            </ModalDefault>
         </DefaultLayout>
 
     )
