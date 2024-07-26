@@ -5,10 +5,21 @@ import { manusiaLaptop } from "../../../image"
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { getAllTransaction } from "../../../service/transaction"
 
 
 const DashboardKasir = () => {
     const navigate: any = useNavigate();
+    const [transaction, setTransaction] = useState([]);
+
+    useEffect(() => {
+        getAllTransaction((result: any) => {
+            setTransaction(result.data)
+        })
+    }, []);
+
+    console.log(transaction);
 
 
     return (
@@ -32,25 +43,26 @@ const DashboardKasir = () => {
             <Table isStriped aria-label="Example static collection table ">
                 <TableHeader>
                     <TableColumn>NO</TableColumn>
-                    <TableColumn>NAMA</TableColumn>
-                    <TableColumn>TIPE TRANSAKSI</TableColumn>
-                    <TableColumn>TOTAL HARGA</TableColumn>
+                    <TableColumn>ID</TableColumn>
+                    <TableColumn>HARGA</TableColumn>
                     <TableColumn>JUMLAH</TableColumn>
                     <TableColumn>STATUS</TableColumn>
-
-
+                    <TableColumn>TIPE TRANSAKSI</TableColumn>
                     <TableColumn>ACTION</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key="1">
-                        <TableCell>1</TableCell>
-                        <TableCell>Oriza Sativa</TableCell>
-                        <TableCell>online</TableCell>
-                        <TableCell>250.000</TableCell>
-                        <TableCell>5</TableCell>
-                        <TableCell>Belum Dibayar</TableCell>
-                        <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
-                    </TableRow>
+                    {transaction.map((item: any, index: number) => (
+                        <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{item._id}</TableCell>
+                            <TableCell>{item.grandtotal}</TableCell>
+                            <TableCell>{item.quantity}</TableCell>
+                            <TableCell>{item.status}</TableCell>
+                            <TableCell>{item.transaction_type}</TableCell>
+                            <TableCell><ButtonPrimary onClick={() => navigate(`/dashboard-kasir/detail-transaction/${item._id}`)} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                        </TableRow>
+                    ))}
+
                 </TableBody>
             </Table>
 
