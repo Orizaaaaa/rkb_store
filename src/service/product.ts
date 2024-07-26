@@ -1,7 +1,7 @@
 import { axiosInterceptor } from "./axiosInterceptor";
 
-export const createReport = async (formUnitWork: any, callback: any) => {
-    await axiosInterceptor.post('/reports', formUnitWork)
+export const createProduct = async (form: any, callback: any) => {
+    await axiosInterceptor.post('/products', form)
         .then((result) => {
             callback(true, result.data)
         }).catch((err: any) => {

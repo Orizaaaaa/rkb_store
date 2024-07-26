@@ -8,13 +8,14 @@ import { SwiperSlide } from "swiper/react"
 import { IoCloseCircleOutline } from "react-icons/io5"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary"
 import { postImagesArray } from "../../../service/imagePost"
+import { createProduct } from "../../../service/product"
 
 const AddProductAdmin = () => {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        price: 0,
-        stock: 0,
+        price: '',
+        stock: '',
         images: [] as File[],
     });
 
@@ -46,12 +47,33 @@ const AddProductAdmin = () => {
     };
 
 
-    const handleAddProduct = () => {
-        //image handle
-        postImagesArray({ images: formData.images }).then((urls) => {
-            console.log(urls);
-        })
-    }
+    const handleAddProduct = async () => {
+        try {
+            // Handle image upload
+            const urls: string[] = await postImagesArray({ images: formData.images });
+            const parsedFormData = {
+                ...formData,
+                images: urls, // Assigning the array of image URLs directly
+                price: parseFloat(formData.price),
+                stock: parseInt(formData.stock)
+            };
+
+            createProduct(parsedFormData, (result: any) => {
+                if (result) {
+                    console.log(result);
+                    setFormData({
+                        title: '',
+                        description: '',
+                        price: '',
+                        stock: '',
+                        images: [],
+                    });
+                }
+            });
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
+    };
 
 
     return (
@@ -72,7 +94,7 @@ const AddProductAdmin = () => {
                     <div className="images border-dashed border-2 mt-7 border-black rounded-md h-[200px] bg-gray-300 relative">
                         <button className="flex flex-col justify-center items-center h-full w-full relative" type="button">
                             <img className="w-20 h-20 mx-auto" src={camera} alt="camera" />
-                            <p>*Masukan logo dari kategori tersebut</p>
+                            <p>*Masukan logo dari product tersebut</p>
                             <input
                                 type="file"
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
