@@ -1,8 +1,17 @@
 
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
 import DefaultLayout from '../../../components/layout/DefaultLayout'
+import { useEffect, useState } from 'react';
+import { getAllUser } from '../../../service/user';
 
 const Customer = () => {
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        getAllUser((data: any) => {
+            setUsers(data.data);
+        })
+    }, []);
+
     return (
         <DefaultLayout>
             <div className="rounded-md  bg-white p-4 lg:px-7.5 lg:py-6 shadow-default dark:border-strokedark mb-4">
@@ -20,17 +29,20 @@ const Customer = () => {
                     <TableColumn>NO</TableColumn>
                     <TableColumn>NAMA</TableColumn>
                     <TableColumn>EMAIL</TableColumn>
-                    <TableColumn>NO HP</TableColumn>
+                    <TableColumn>ROLE</TableColumn>
                     <TableColumn>Alamat</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key="1">
-                        <TableCell>1</TableCell>
-                        <TableCell>Gabriel Babi</TableCell>
-                        <TableCell>5</TableCell>
-                        <TableCell>082323877656</TableCell>
-                        <TableCell>Jalan babi, kecamatan lembang, kabupaten lembang...</TableCell>
-                    </TableRow>
+                    {users.map((item: any, index: number) => (
+                        <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{item?.username}</TableCell>
+                            <TableCell>{item?.email}</TableCell>
+                            <TableCell>{item?.role}</TableCell>
+                            <TableCell>{item?.address}</TableCell>
+                        </TableRow>
+                    ))}
+
                 </TableBody>
             </Table>
         </DefaultLayout>

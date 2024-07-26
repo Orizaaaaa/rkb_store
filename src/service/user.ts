@@ -6,6 +6,6 @@ export const getAllUser = (callback: any) => {
             callback(res.data);
         })
         .catch((error) => {
-            console.error("Error fetching all unit work:", error);
+            console.error("Error fetching all user", error);
         });
 }
