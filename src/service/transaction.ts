@@ -16,3 +16,13 @@ export const getDetailTransaction = (id: string, callback: any) => {
             console.log(err);
         });
 }
+
+
+export const createTransaction = async (form: any, callback: any) => {
+    await axiosInterceptor.post('/transactions/create', form)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}

@@ -7,11 +7,13 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import ModalDefault from "../../../components/fragments/modal/Modal"
 import { useEffect, useState } from "react"
 import InputReport from "../../../components/elemets/input/InputReport"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getDetailProduct } from "../../../service/product"
 import { formatRupiah } from "../../../utils/helper"
+import { createTransaction } from "../../../service/transaction"
 
 const DetailProductUser = () => {
+    const navigate = useNavigate();
     const { id }: any = useParams();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [product, setProduct] = useState({} as any);
@@ -19,44 +21,6 @@ const DetailProductUser = () => {
     const [totalPrice, setTotalPrice] = useState(initialPrice);
     const user_id = localStorage.getItem("user_id");
     const [errorMsg, setErrorMsg] = useState(" ")
-    const [form, setForm] = useState({
-        status: "Belum Dibayar",
-        product: "",
-        user: user_id,
-        payment_document: null as File | null,
-        quantity: 0,
-        transaction_type: "online"
-    })
-
-    const modalCreateTransaction = () => {
-        onOpen();
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        let newQuantity = form.quantity;
-
-        if (name === 'quantity') {
-            newQuantity = Number(value);
-        }
-
-        setForm({ ...form, [name]: value });
-
-        if (name === 'quantity') {
-            const updatedPrice = initialPrice * newQuantity;
-            const priceWithTax = updatedPrice + (updatedPrice * 0.11);
-            setTotalPrice(priceWithTax);
-        }
-    };
-
-    const submitProduct = (e: any) => {
-        e.preventDefault();
-        if (form.quantity == 0 || form.quantity < 0) {
-            setErrorMsg("*Jumlah tidak boleh kosong dan 0")
-        } else {
-            setErrorMsg("")
-        }
-    }
 
     useEffect(() => {
         getDetailProduct(id, (result: any) => {
@@ -64,6 +28,53 @@ const DetailProductUser = () => {
         })
     }, []);
 
+    const [form, setForm] = useState({
+        product: product._id,
+        user: user_id,
+        quantity: '',
+        transaction_type: "online"
+    } as any);
+
+    const modalCreateTransaction = () => {
+        setForm({
+            ...form,
+            product: product._id
+        })
+        onOpen();
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        let newValue: string | number = value;
+
+        if (name === 'quantity') {
+            newValue = Number(value);
+        }
+
+        setForm({ ...form, [name]: newValue });
+
+        if (name === 'quantity') {
+            const newQuantity = Number(value);
+            const updatedPrice = initialPrice * newQuantity;
+            const priceWithTax = updatedPrice + (updatedPrice * 0.11);
+            setTotalPrice(priceWithTax);
+        }
+    };
+
+
+    const submitProduct = (e: any) => {
+        e.preventDefault();
+        if (form.quantity == 0 || form.quantity < 0) {
+            setErrorMsg("*Jumlah tidak boleh kosong dan 0")
+        } else {
+            createTransaction(form, (result: any) => {
+                navigate(`/transaction-user`)
+                console.log(result);
+            })
+            setErrorMsg("")
+        }
+    }
+        ;
 
 
 
