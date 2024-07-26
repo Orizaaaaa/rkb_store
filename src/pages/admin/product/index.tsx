@@ -30,7 +30,9 @@ const ProductAdmin = () => {
         setSearchData(e.target.value);
     };
 
-
+    const filteredData = dataProduct.filter((item: any) => {
+        return item.title.toLowerCase().includes(searchData.toLowerCase());
+    });
 
 
     return (
@@ -50,7 +52,7 @@ const ProductAdmin = () => {
                 {loading ? (
                     <CardLoading />
                 ) : (
-                    dataProduct.map((item: any, key: any) => (
+                    filteredData.map((item: any, key: any) => (
                         <CardProduct key={key} location={`/product-admin/detail-product-admin/${item._id}`}
                             title={item.title}
                             price={formatRupiah(item.price)}
