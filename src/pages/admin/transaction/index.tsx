@@ -50,7 +50,7 @@ const Transaction = () => {
                             <TableCell>{item.quantity}</TableCell>
                             <TableCell>{item.status}</TableCell>
                             <TableCell>{item.transaction_type}</TableCell>
-                            <TableCell><ButtonPrimary onClick={() => navigate("/transaction-admin/detail-transaction")} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
+                            <TableCell><ButtonPrimary onClick={() => navigate(`/transaction-admin/detail-transaction/${item._id}`)} className="w-full rounded-md" >Detail</ButtonPrimary></TableCell>
                         </TableRow>
                     ))}
 

@@ -32,6 +32,16 @@ export const statusChange = (value: string) => {
     }
 }
 
+export const statusText = (value: string) => {
+    if (value === 'Belum Dibayar') {
+        return ('text-[#FF7F0A]')
+    } else if (value === 'Menunggu') {
+        return ('text-primary')
+    } else if (value === 'Selesai') {
+        return ('text-green-500')
+    }
+}
+
 export function formatRupiah(amount: number | undefined): string {
     if (amount === undefined) {
         return 'Rp 0';

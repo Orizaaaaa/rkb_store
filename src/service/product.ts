@@ -30,25 +30,7 @@ export const getDetailProduct = (id: string, callback: any) => {
             console.error("Error fetching get product by id", error);
         });
 }
-// export const assignReport = async (formData: any, callback: any) => {
-//     await axiosInterceptor.post('/reports/assign', formData)
-//         .then((result) => {
-//             callback(true, result.data)
-//         }).catch((err: any) => {
-//             console.log(false, err);
-//         });
-// }
 
-
-// export const finishReportByOfficer = (formData: any, callback: any) => {
-//     axiosInterceptor.post('/reports/officer/done', formData)
-//         .then((result) => {
-//             callback(result.data)
-
-//         }).catch((err) => {
-//             console.log(err);
-//         });
-// }
 
 
 export const deleteProduct = async (id: any, callback: any) => {
