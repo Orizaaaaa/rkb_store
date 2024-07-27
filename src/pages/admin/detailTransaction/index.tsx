@@ -4,6 +4,9 @@ import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { useEffect, useState } from "react";
 import { getDetailTransaction } from "../../../service/transaction";
 import { formatRupiah, statusText } from "../../../utils/helper";
+import { Player } from "@lottiefiles/react-lottie-player";
+import animationTroli from '../../../assets/troliAnimation.json'
+import animationTrans from '../../../assets/animationSearchTrans.json'
 
 const DetailTransaction = () => {
     const { id }: any = useParams();
@@ -39,6 +42,8 @@ const DetailTransaction = () => {
     ]
 
 
+    console.log(transaction);
+
 
 
     return (
@@ -61,9 +66,17 @@ const DetailTransaction = () => {
                             </div>
                         </div>
 
-                        <div className="image-transaction mt-4">
-                            <img className=" w-auto md:h-[300px] rounded-md " src={transaction?.payment_document} alt="image" />
-                        </div>
+                        {transaction?.transaction_type === 'offline' ? (
+                            <Player style={{ height: '300px' }} autoplay loop src={animationTroli} />
+                        ) : (
+                            <div className="image-transaction mt-4">
+                                {transaction?.payment_document ? (
+                                    <img className="w-auto md:h-[300px] rounded-md" src={transaction?.payment_document} alt="image" />
+                                ) : (
+                                    <Player style={{ height: '300px' }} autoplay loop src={animationTrans} />
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
 

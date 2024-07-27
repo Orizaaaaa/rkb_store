@@ -130,8 +130,6 @@ const DetailProductAdmin = () => {
                     <div className='p-3 lg:p-5' >
                         <h1 className=' text-lg lg:text-xl md:text-3xl font-semibold' >{dataProduct?.title}</h1>
                         <h2 className='text-md text-gray-500 my-2  font-medium' >{formatRupiah(dataProduct?.price)}</h2>
-
-                        <h1 className='font-medium my-3 text-base' >AN ARSENAL FAN JERSEY IN THEIR FAMOUS HOME COLOURS, MADE WITH RECYCLED MATERIALS.</h1>
                         <p>{dataProduct?.description}</p>
 
                         <h2 className='text-lg text-gray-500 my-2  ' > <span className='text-red-900 font-medium' >{dataProduct?.stock}</span>  Stock tersedia</h2>

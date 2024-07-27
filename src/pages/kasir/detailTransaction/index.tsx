@@ -103,7 +103,7 @@ const DetailTransactionKasir = () => {
                             <Player style={{ height: '300px' }} autoplay loop src={animationTroli} />
                         ) : (
                             <div className="image-transaction mt-4">
-                                {transaction?.payment_document === 'online' ? (
+                                {transaction?.payment_document ? (
                                     <img className="w-auto md:h-[300px] rounded-md" src={transaction?.payment_document} alt="image" />
                                 ) : (
                                     <Player style={{ height: '300px' }} autoplay loop src={animationTrans} />
