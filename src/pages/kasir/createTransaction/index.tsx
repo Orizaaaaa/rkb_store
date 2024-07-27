@@ -21,7 +21,6 @@ const CreateTransactionKasir = () => {
     const [product, setProduct] = useState({} as any);
     const initialPrice = product?.price ? parseFloat(product.price) : 0.0; // Harga awal barang
     const [totalPrice, setTotalPrice] = useState(initialPrice);
-    const user_id = localStorage.getItem("user_id");
     const [errorMsg, setErrorMsg] = useState(" ")
 
     useEffect(() => {
@@ -32,9 +31,10 @@ const CreateTransactionKasir = () => {
 
     const [form, setForm] = useState({
         product: product._id,
-        user: user_id,
+        user: '66a4629967adef51e313b84f',
         quantity: '',
-        transaction_type: "online"
+        status: 'Selesai',
+        transaction_type: "offline"
     } as any);
 
     const modalCreateTransaction = () => {
