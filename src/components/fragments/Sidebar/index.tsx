@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 
 import NavigationList from "../NavigationList/NavigationList";
 import { RxDashboard } from "react-icons/rx";
-import { FaBookReader } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { logo2 } from "../../../image";
 import { FaMoneyBills } from "react-icons/fa6";
