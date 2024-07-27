@@ -6,7 +6,7 @@ function Hero() {
       <section className=' min-h-[92vh] bg-[#f1faee] grid grid-cols-1 items-center px-4 pb-20 pt-5 md:px-20 lg:grid-cols-5 overflow-x-hidden '
       >
         <div className='animate__fadeInLeft animate__animated animate__delay-0.7s order-last py-4 md:order-first md:py-0 lg:pr-8 col-span-3'>
-          <h1 className='mt-0 text-2xl font-bold font-inter md:mt-4  lg:text-6xl text-black '>  Revolusi Kaos Bandung  <span className='text-primary' >Store.</span>  </h1>
+          <h1 className='mt-0 text-2xl font-bold font-inter md:mt-4  lg:text-6xl text-black '>  Resolusi Kaos Bandung  <span className='text-primary' >Store.</span>  </h1>
           <p className='mt-10' >Merupakan website yang menyediakan berbagai macam kaos kekinian dengan transaksi online atau pun offline, jelajahi
             website kami sekarang dan belanja kaos yang anda sukai
           </p>
