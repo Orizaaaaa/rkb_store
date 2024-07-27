@@ -129,7 +129,7 @@ const CategoryAdmin = () => {
 
                         {category.map((item: any, index: any) => (
                             <div key={index} className="image flex-col justify-center items-center  p-3 rounded-md " >
-                                <div className={`bg-[#f1faee] p-6 relative ${dataDelete === item._id ? 'border-2 border-primary rounded-md ' : ''}`}>
+                                <div className={`bg-[#f1faee] rounded-md p-6 relative ${dataDelete === item._id ? 'border-2 border-primary  ' : ''}`}>
                                     <img onClick={() => handleChangeId(item._id)} className={`w-[100px] h-[100px] mx-auto rounded-md object-cover cursor-pointer `}
                                         src={item.image} alt={'image kategori'} />
                                     <button onClick={handleDeleteModal} className={`absolute top-0 right-0 p-1 ${dataDelete === item._id ? 'block' : 'hidden'}`} ><IoCloseCircleSharp color="red" size={20} /></button>
