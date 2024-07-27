@@ -35,7 +35,11 @@ export const statusChange = (value: string) => {
 export const statusText = (value: string) => {
     if (value === 'Belum Dibayar') {
         return ('text-[#FF7F0A]')
-    } else if (value === 'Menunggu') {
+    } else if (value === 'Dibayar') {
+        return ('text-[#FF7F0A]')
+    } else if (value === 'Diproses') {
+        return ('text-[#FF7F0A]')
+    } else if (value === 'Dikirim') {
         return ('text-primary')
     } else if (value === 'Selesai') {
         return ('text-green-500')

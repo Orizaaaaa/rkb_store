@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
-import { camera, jalanRusak } from "../../../image"
+import { camera } from "../../../image"
 import ButtonPrimary from "../../../components/elemets/buttonPrimary";
 import { getDetailTransaction, updateTransaction } from "../../../service/transaction";
 import { useParams } from "react-router-dom";
 import { formatRupiah, statusText } from "../../../utils/helper";
+import { postImage } from "../../../service/imagePost";
 
 const TransactionDetailUser = () => {
     const { id }: any = useParams();
@@ -19,7 +20,7 @@ const TransactionDetailUser = () => {
 
     const [formData, setFormData] = useState({
         status: "Dibayar",
-        image: null as File | null
+        payment_document: null as File | null
     });
 
     const handleFileManager = (fileName: string) => {
@@ -34,7 +35,7 @@ const TransactionDetailUser = () => {
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, InputSelect: string) => {
         if (InputSelect === 'add') {
             const selectedImage = e.target.files?.[0];
-            setFormData({ ...formData, image: selectedImage || null });
+            setFormData({ ...formData, payment_document: selectedImage || null });
         } else {
             console.log('error');
 
@@ -42,17 +43,17 @@ const TransactionDetailUser = () => {
     };
 
     // submit data gambar sudah berhasil tapi get payments docs nya belum 
-    const handleSubmit = () => {
-        updateTransaction(id, formData, (result: any) => {
-            console.log(result);
-        })
-
+    const handleSubmit = async () => {
+        const imageUrl = await postImage({ image: formData.payment_document });
+        if (imageUrl) {
+            const data = { status: formData.status, payment_document: imageUrl }
+            updateTransaction(id, data, (result: any) => {
+                console.log(result.data);
+            })
+        }
     }
-    console.log(detailTransaction);
 
 
-    // ini adalah contoh ketika data dari API ada atau tidak ada
-    const contohImageAPI = false
     return (
         <DefaultLayout>
             <Card>
@@ -91,15 +92,15 @@ const TransactionDetailUser = () => {
                             </div>
                         </div>
 
-                        {contohImageAPI ? (
+                        {detailTransaction.payment_document ? (
                             <div className="image-transaction mt-4">
-                                <img className=" w-auto md:h-[300px] rounded-md " src={jalanRusak} alt="" />
+                                <img className=" w-auto md:h-[300px] rounded-md " src={detailTransaction.payment_document} alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="images mt-3">
-                                    {formData.image && formData.image instanceof Blob ? (
-                                        <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.image)} />
+                                    {formData.payment_document && formData.payment_document instanceof Blob ? (
+                                        <img className="h-[170px] md:h-[300px] w-auto mx-auto rounded-md" src={URL.createObjectURL(formData.payment_document)} />
                                     ) : (
                                         <div className="images border-dashed border-2 border-black rounded-md h-[200px] bg-gray-300">
                                             <button className="flex-col justify-center items-center h-full w-full " type="button" onClick={() => handleFileManager('add')} >
@@ -115,7 +116,7 @@ const TransactionDetailUser = () => {
                                         onChange={(e) => handleImageChange(e, 'add')}
                                     />
                                     <div className="flex justify-center gap-3 mt-3">
-                                        <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.image === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
+                                        <button className={`border-2 border-primary  text-primary px-4 py-2 rounded-md ${formData.payment_document === null ? 'hidden' : ''}`} type="button" onClick={() => handleFileManager('add')} >Ubah Gambar</button>
                                     </div>
                                 </div>
                                 <ButtonPrimary onClick={handleSubmit} className="w-full mt-5 rounded-md"  >Simpan</ButtonPrimary>

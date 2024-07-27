@@ -2,9 +2,9 @@
 import { useParams } from 'react-router-dom';
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { useEffect, useState } from 'react';
-import { getDetailTransaction } from '../../../service/transaction';
+import { getDetailTransaction, updateTransaction } from '../../../service/transaction';
 import { formatRupiah, statusText } from '../../../utils/helper';
-import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
+import { Spinner } from '@nextui-org/react';
 import Card from '../../../components/elemets/card/Card';
 import ButtonPrimary from '../../../components/elemets/buttonPrimary';
 
@@ -13,6 +13,7 @@ const DetailTransactionKasir = () => {
 
     const { id }: any = useParams();
     const [transaction, setTransaction] = useState({}) as any;
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         getDetailTransaction(id, (result: any) => {
             console.log(result.data);
@@ -43,6 +44,18 @@ const DetailTransactionKasir = () => {
         },
     ]
 
+    const changeStatus = async (value: string) => {
+        setLoading(true)
+        await updateTransaction(id, { status: value }, (result: any) => {
+            console.log(result.data);
+            getDetailTransaction(id, (result: any) => {
+                setTransaction(result.data)
+                setLoading(false)
+
+            })
+        })
+    }
+
     return (
         <DefaultLayout>
             <Card  >
@@ -54,11 +67,24 @@ const DetailTransactionKasir = () => {
                                 <p className="font-medium" >{item?.text}</p>
                             </div>
                         ))}
-                        <h1 className="text-lg font-medium text-gray-500 mt-4" >Ubah Status Transaksi</h1>
-                        <div className="flex mt-2 gap-3">
-                            <button className='text-primary border-2 border-primary rounded-md px-4 py-2' >Di Proses</button>
-                            <ButtonPrimary className=" rounded-md" >Selesai</ButtonPrimary>
-                        </div>
+
+                        {transaction.transaction_type === 'online' && (
+                            <>
+                                <h1 className="text-lg font-medium text-gray-500 mt-4" >Ubah Status Transaksi</h1>
+                                <div className="flex mt-2 gap-3">
+                                    <button className='text-orange-400 border-2 border-orange-400 rounded-md px-4 py-2 min-w-27' onClick={() => changeStatus('Diproses')} >
+                                        {loading ? <Spinner className={`w-5 h-5 `} size="sm" color="primary" /> : 'Diproses'}
+                                    </button>
+                                    <button className='text-primary border-2 border-primary rounded-md px-4 py-2 min-w-27' onClick={() => changeStatus('Dikirim')} >
+                                        {loading ? <Spinner className={`w-5 h-5 `} size="sm" color="primary" /> : 'Dikirim'}
+                                    </button>
+                                    <ButtonPrimary className=" rounded-md min-w-27" onClick={() => changeStatus('Selesai')} >
+                                        {loading ? <Spinner className={`w-5 h-5 `} size="sm" color="white" /> : 'Selesai'}
+                                    </ButtonPrimary>
+                                </div>
+                            </>
+
+                        )}
                     </div>
 
                     <div className="right">
