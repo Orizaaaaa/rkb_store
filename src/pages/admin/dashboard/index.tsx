@@ -93,6 +93,7 @@ const DashboardAdmin = () => {
 
     const options: ChartOptions<'line'> = {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 beginAtZero: true,
@@ -111,7 +112,6 @@ const DashboardAdmin = () => {
                     textAlign: 'center',
                 }
             },
-
             title: {
                 display: true,
                 text: 'Data Penjualan Selama 1 Tahun',
@@ -121,10 +121,9 @@ const DashboardAdmin = () => {
                 },
                 align: 'start'
             },
-
-
         },
     }
+
 
 
 
@@ -165,9 +164,12 @@ const DashboardAdmin = () => {
                 ))}
             </div >
 
-            <Card >
-                <Line data={data} options={options} height={90} />
+            <Card className="w-full">
+                <div className="relative w-full h-100 sm:h-80 md:h-72 lg:h-64">
+                    <Line data={data} options={options} />
+                </div>
             </Card>
+
 
 
 
