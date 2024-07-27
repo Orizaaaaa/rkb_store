@@ -17,7 +17,7 @@ interface Report {
 const DashboardAdmin = () => {
 
     const [dataDashboard, setDataDashboard] = useState({} as Report);
-    const [dataChart, setDataChart] = useState({} as any)
+    const [dataChart, setDataChart] = useState([] as any)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
@@ -26,7 +26,7 @@ const DashboardAdmin = () => {
             setLoading(false)
         })
         getDataPerMonth((result: any) => {
-            setDataChart(result.data)
+            setDataChart(result.data);
         })
     }, []);
 
@@ -49,10 +49,10 @@ const DashboardAdmin = () => {
 
     ]
 
-    const filteringTransaction = dataChart.map((item: any) => {
+    const filteringTransaction = dataChart?.map((item: any) => {
         return item.totalTransactions
     })
-    const filteringAmount = dataChart.map((item: any) => {
+    const filteringAmount = dataChart?.map((item: any) => {
         return item.totalAmount
     })
 
@@ -72,14 +72,14 @@ const DashboardAdmin = () => {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [
             {
-                label: 'Data Penjualan',
+                label: ' Penjualan per bulan',
                 data: filteringTransaction,
                 borderColor: "#00B2FF",
                 backgroundColor: "#00B2FF",
 
             },
             {
-                label: 'Data Pendapatan',
+                label: ' Pendapatan',
                 data: filteringAmount,
                 borderColor: "green",
                 backgroundColor: "green",
