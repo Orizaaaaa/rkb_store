@@ -7,7 +7,9 @@ import { formatRupiah, statusText } from '../../../utils/helper';
 import { Spinner } from '@nextui-org/react';
 import Card from '../../../components/elemets/card/Card';
 import ButtonPrimary from '../../../components/elemets/buttonPrimary';
-
+import animationTroli from '../../../assets/troliAnimation.json'
+import animationTrans from '../../../assets/animationSearchTrans.json'
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const DetailTransactionKasir = () => {
 
@@ -56,6 +58,9 @@ const DetailTransactionKasir = () => {
         })
     }
 
+
+
+
     return (
         <DefaultLayout>
             <Card  >
@@ -94,9 +99,19 @@ const DetailTransactionKasir = () => {
                             </div>
                         </div>
 
-                        <div className="image-transaction mt-4">
-                            <img className=" w-auto md:h-[300px] rounded-md " src={transaction?.payment_document} alt="image" />
-                        </div>
+                        {transaction?.transaction_type === 'offline' ? (
+                            <Player style={{ height: '300px' }} autoplay loop src={animationTroli} />
+                        ) : (
+                            <div className="image-transaction mt-4">
+                                {transaction?.payment_document === 'online' ? (
+                                    <img className="w-auto md:h-[300px] rounded-md" src={transaction?.payment_document} alt="image" />
+                                ) : (
+                                    <Player style={{ height: '300px' }} autoplay loop src={animationTrans} />
+                                )}
+                            </div>
+                        )}
+
+
                     </div>
                 </div>
 
