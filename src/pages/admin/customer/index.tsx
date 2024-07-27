@@ -18,8 +18,8 @@ const Customer = () => {
                 <div className=" rounded-full ">
                     <div className="grid ">
                         <div className="flex-col space-y-3 my-auto">
-                            <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Transaksi </h1>
-                            <p className="text-gray-500 text-sm md:text-base" >Ini adalah halaman transaksi dimana anda dapat melihat transaksi online maupun online</p>
+                            <h1 className=" text-lg font-semibold md:text-2xl md:font-bold font-inter" >Halaman Customer </h1>
+                            <p className="text-gray-500 text-sm md:text-base" >Ini adalah customer dimana anda dapat melihat semua customer termasuk role nya</p>
                         </div>
                     </div>
                 </div>
