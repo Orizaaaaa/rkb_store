@@ -70,7 +70,7 @@ const CreateTransactionKasir = () => {
             setErrorMsg("*Jumlah tidak boleh kosong dan 0")
         } else {
             createTransaction(form, (result: any) => {
-                navigate(`/transaction-user`)
+                navigate(`/dashboard-kasir`)
                 console.log(result);
             })
             setErrorMsg("")
