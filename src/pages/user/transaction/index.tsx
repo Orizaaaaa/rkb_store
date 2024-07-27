@@ -43,7 +43,7 @@ const TransactionUser = () => {
                     {transaction.map((item: any, index: number) => (
                         <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
-                            <TableCell>{item.product.title}</TableCell>
+                            <TableCell>{item?.product?.title || 'Barang telah di hapus di etalase'}</TableCell>
                             <TableCell>{formatRupiah(item.grandtotal)}</TableCell>
                             <TableCell>{item.quantity}</TableCell>
                             <TableCell>{item.status}</TableCell>
