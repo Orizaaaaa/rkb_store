@@ -18,3 +18,12 @@ export const coordinateDashboard = (callback: any) => {
             console.log(err);
         });
 }
+
+export const getDataPerMonth = (callback: any) => {
+    axios.get(`${url}/dashboard/total-transactions-per-month`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}
