@@ -50,7 +50,7 @@ function App() {
             <Route path="/dashboard-kasir" element={<DashboardKasir />} />
             <Route path="/dashboard-kasir/detail-transaction/:id" element={<DetailTransactionKasir />} />
             <Route path="/transaction-offline-kasir" element={<TransactionOfflineKasir />} />
-            <Route path="/transaction-offline-kasir/create-transaction" element={<CreateTransactionKasir />} />
+            <Route path="/transaction-offline-kasir/create-transaction/:id" element={<CreateTransactionKasir />} />
 
           </Route>
 
