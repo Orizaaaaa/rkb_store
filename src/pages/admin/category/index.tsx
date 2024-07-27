@@ -134,7 +134,7 @@ const CategoryAdmin = () => {
                                         src={item.image} alt={'image kategori'} />
                                     <button onClick={handleDeleteModal} className={`absolute top-0 right-0 p-1 ${dataDelete === item._id ? 'block' : 'hidden'}`} ><IoCloseCircleSharp color="red" size={20} /></button>
                                 </div>
-                                <p className="text-center" >{item.name}</p>
+                                <p className="text-center font-medium mt-1" >{item.name}</p>
                             </div>
                         ))}
 
