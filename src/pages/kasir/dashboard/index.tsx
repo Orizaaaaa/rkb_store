@@ -12,16 +12,20 @@ import { getAllTransaction } from "../../../service/transaction"
 const DashboardKasir = () => {
     const navigate: any = useNavigate();
     const [transaction, setTransaction] = useState([]);
-
+    const [searchData, setSearchData] = useState("");
     useEffect(() => {
         getAllTransaction((result: any) => {
             setTransaction(result.data)
         })
     }, []);
 
-    console.log(transaction);
+    const handleSearch = (e: any) => {
+        setSearchData(e.target.value);
+    };
 
-
+    const filteredData = transaction.filter((item: any) => {
+        return item?.user?.username.toLowerCase().includes(searchData.toLowerCase());
+    });
     return (
         <DefaultLayout>
             <Card>
@@ -36,14 +40,14 @@ const DashboardKasir = () => {
                 </div>
             </Card >
             <div className="w-full  my-4 relative ">
-                <input className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="ketik nama pembeli ..." name="" id="" />
+                <input onChange={handleSearch} className="w-full rounded-md bg-white outline-none py-2 ps-11" type="text" placeholder="Masukan nama pembeli ..." name="" id="" />
                 <IoSearch size={20} color="#7C7C7C" className="absolute left-3 top-1/2 -translate-y-1/2" />
             </div>
 
             <Table isStriped aria-label="Example static collection table ">
                 <TableHeader>
                     <TableColumn>NO</TableColumn>
-                    <TableColumn>ID</TableColumn>
+                    <TableColumn>NAMA</TableColumn>
                     <TableColumn>HARGA</TableColumn>
                     <TableColumn>JUMLAH</TableColumn>
                     <TableColumn>STATUS</TableColumn>
@@ -51,10 +55,10 @@ const DashboardKasir = () => {
                     <TableColumn>ACTION</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {transaction.map((item: any, index: number) => (
+                    {filteredData.map((item: any, index: number) => (
                         <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
-                            <TableCell>{item._id}</TableCell>
+                            <TableCell>{item?.user?.username}</TableCell>
                             <TableCell>{item.grandtotal}</TableCell>
                             <TableCell>{item.quantity}</TableCell>
                             <TableCell>{item.status}</TableCell>
