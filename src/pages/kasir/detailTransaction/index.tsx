@@ -1,18 +1,20 @@
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DefaultLayout from '../../../components/layout/DefaultLayout'
 import { useEffect, useState } from 'react';
-import { getDetailTransaction, updateTransaction } from '../../../service/transaction';
+import { deleteTransaction, getDetailTransaction, updateTransaction } from '../../../service/transaction';
 import { formatRupiah, statusText } from '../../../utils/helper';
-import { Spinner } from '@nextui-org/react';
+import { Spinner, useDisclosure } from '@nextui-org/react';
 import Card from '../../../components/elemets/card/Card';
 import ButtonPrimary from '../../../components/elemets/buttonPrimary';
 import animationTroli from '../../../assets/troliAnimation.json'
 import animationTrans from '../../../assets/animationSearchTrans.json'
 import { Player } from '@lottiefiles/react-lottie-player';
+import AlertModal from '../../../components/fragments/modal/AlertModal';
 
 const DetailTransactionKasir = () => {
-
+    const navigate = useNavigate();
+    const { isOpen: isWarningOpen, onOpen: onWarningOpen, onClose: onWarningClose } = useDisclosure();
     const { id }: any = useParams();
     const [transaction, setTransaction] = useState({}) as any;
     const [loading, setLoading] = useState(false);
@@ -58,8 +60,16 @@ const DetailTransactionKasir = () => {
         })
     }
 
+    const handleDeleteModal = () => {
+        onWarningOpen();
+    };
 
-
+    const confirmDelete = () => {
+        deleteTransaction(id, (result: any) => {
+            console.log(result.data);
+            navigate('/dashboard-kasir')
+        })
+    };
 
     return (
         <DefaultLayout>
@@ -97,6 +107,8 @@ const DetailTransactionKasir = () => {
                             <div className="status">
                                 <p className={`font-medium text-end md:mr-15 rounded-md ${statusText(transaction?.status)}`} >{transaction?.status}</p>
                             </div>
+
+
                         </div>
 
                         {transaction?.transaction_type === 'offline' ? (
@@ -111,10 +123,15 @@ const DetailTransactionKasir = () => {
                             </div>
                         )}
 
-
                     </div>
                 </div>
-
+                <div className="flex justify-end">
+                    <ButtonPrimary className="rounded-md bg-red-900 " onClick={handleDeleteModal}  >Hapus Transaksi</ButtonPrimary>
+                </div>
+                {/* Warning Modal */}
+                <AlertModal isOpen={isWarningOpen} onClose={onWarningClose} onClick={confirmDelete} >
+                    <p>Apakah anda yakin ingin menghapus Transaksi ini ?</p>
+                </AlertModal>
             </Card>
 
         </DefaultLayout>

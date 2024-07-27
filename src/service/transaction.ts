@@ -42,3 +42,12 @@ export const getTransactionByUser = async (id: string, callback: any) => {
             console.log(err);
         });
 }
+
+export const deleteTransaction = async (id: string, callback: any) => {
+    await axiosInterceptor.delete(`/transactions/delete/${id}`)
+        .then((result) => {
+            callback(result.data)
+        }).catch((err) => {
+            console.log(err);
+        });
+}
