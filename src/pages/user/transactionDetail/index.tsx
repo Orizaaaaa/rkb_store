@@ -48,7 +48,11 @@ const TransactionDetailUser = () => {
         if (imageUrl) {
             const data = { status: formData.status, payment_document: imageUrl }
             updateTransaction(id, data, (result: any) => {
-                console.log(result.data);
+                if (result) {
+                    getDetailTransaction(id, (result: any) => {
+                        setDetailTransaction(result.data)
+                    })
+                }
             })
         }
     }
