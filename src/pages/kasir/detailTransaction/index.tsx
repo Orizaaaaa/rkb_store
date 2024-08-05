@@ -138,7 +138,7 @@ const DetailTransactionKasir = () => {
                 <div className="flex justify-end gap-2">
                     <ButtonPrimary className="rounded-md bg-red-900 " onClick={handleDeleteModal}  >Hapus Transaksi</ButtonPrimary>
                     <button onClick={handlePrint} className="bg-primary text-white py-2 px-4 rounded flex items-center gap-2">
-                        Print Invoice
+                        Cetak Invoice
                         <FaFileInvoiceDollar size={20} />
                     </button>
                 </div>

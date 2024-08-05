@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Card from "../../../components/elemets/card/Card"
 import DefaultLayout from "../../../components/layout/DefaultLayout"
 import { camera } from "../../../image"
@@ -7,6 +7,9 @@ import { getDetailTransaction, updateTransaction } from "../../../service/transa
 import { useParams } from "react-router-dom";
 import { formatRupiah, statusText } from "../../../utils/helper";
 import { postImage } from "../../../service/imagePost";
+import { FaFileInvoiceDollar } from "react-icons/fa6";
+import Invoice from "../../../components/fragments/Invoice/Invoice";
+import { useReactToPrint } from "react-to-print";
 
 const TransactionDetailUser = () => {
     const { id }: any = useParams();
@@ -56,6 +59,13 @@ const TransactionDetailUser = () => {
             })
         }
     }
+
+
+    const invoiceRef = useRef<HTMLDivElement>(null);
+
+    const handlePrint = useReactToPrint({
+        content: () => invoiceRef.current,
+    });
 
 
     return (
@@ -127,14 +137,23 @@ const TransactionDetailUser = () => {
                             </>
                         )}
 
-
-
-
+                        <ButtonPrimary onClick={handlePrint} className={` mt-5 rounded-md flex  gap-3 items-center ${detailTransaction.status !== 'Belum Dibayar' ? '' : 'hidden'}`}  >
+                            Cetak Invoice
+                            <FaFileInvoiceDollar size={20} />
+                        </ButtonPrimary>
 
                     </div>
                 </div>
                 <p className="mt-3" ><i>*Jika product sudah sesuai dengan yang anda inginkan, transfer ke rekening berikut (BCA) 12323232, pastikan harga sesuai dengan yang anda pesan</i></p>
             </Card>
+
+            <div className="mt-10">
+                <div style={{ position: 'absolute', top: '-9999px', left: '-9999px' }} >
+                    <Invoice name={detailTransaction?.user?.username} date={detailTransaction?.createdAt} ppn={detailTransaction?.ppn} product={detailTransaction?.product?.title} quantity={detailTransaction?.quantity}
+                        price={detailTransaction?.grandtotal} transaction_type={detailTransaction?.transaction_type} grandtotal={detailTransaction?.grandtotal}
+                        ref={invoiceRef} />
+                </div>
+            </div>
 
         </DefaultLayout>
     )
