@@ -136,7 +136,7 @@ const AddProductAdmin = () => {
                 <textarea name="description" onChange={handleChange} value={formData.description} className="block mt-2 text-black p-2.5 w-full text-sm border border-gray-300 rounded-lg bg-gray-50
                      outline-none" placeholder="Tulis deskripsi..."></textarea>
 
-                <div className="grid grid-cols-2 gap-3 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center">
                     <div className="images border-dashed border-2 mt-7 border-black rounded-md h-[200px] bg-gray-300 relative">
                         <button className="flex flex-col justify-center items-center h-full w-full relative" type="button">
                             <img className="w-20 h-20 mx-auto" src={camera} alt="camera" />
