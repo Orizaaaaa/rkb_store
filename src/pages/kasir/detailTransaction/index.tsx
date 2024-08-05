@@ -1,7 +1,7 @@
 
 import { useNavigate, useParams } from 'react-router-dom';
 import DefaultLayout from '../../../components/layout/DefaultLayout'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { deleteTransaction, getDetailTransaction, updateTransaction } from '../../../service/transaction';
 import { formatRupiah, statusText } from '../../../utils/helper';
 import { Spinner, useDisclosure } from '@nextui-org/react';
@@ -11,6 +11,9 @@ import animationTroli from '../../../assets/troliAnimation.json'
 import animationTrans from '../../../assets/animationSearchTrans.json'
 import { Player } from '@lottiefiles/react-lottie-player';
 import AlertModal from '../../../components/fragments/modal/AlertModal';
+import Invoice from '../../../components/fragments/Invoice/Invoice';
+import { useReactToPrint } from 'react-to-print';
+import { FaFileInvoiceDollar } from 'react-icons/fa6';
 
 const DetailTransactionKasir = () => {
     const navigate = useNavigate();
@@ -71,6 +74,12 @@ const DetailTransactionKasir = () => {
         })
     };
 
+    const invoiceRef = useRef<HTMLDivElement>(null);
+
+    const handlePrint = useReactToPrint({
+        content: () => invoiceRef.current,
+    });
+
     return (
         <DefaultLayout>
             <Card  >
@@ -125,15 +134,28 @@ const DetailTransactionKasir = () => {
 
                     </div>
                 </div>
-                <div className="flex justify-end">
+
+                <div className="flex justify-end gap-2">
                     <ButtonPrimary className="rounded-md bg-red-900 " onClick={handleDeleteModal}  >Hapus Transaksi</ButtonPrimary>
+                    <button onClick={handlePrint} className="bg-primary text-white py-2 px-4 rounded flex items-center gap-2">
+                        Print Invoice
+                        <FaFileInvoiceDollar size={20} />
+                    </button>
                 </div>
+
                 {/* Warning Modal */}
                 <AlertModal isOpen={isWarningOpen} onClose={onWarningClose} onClick={confirmDelete} >
                     <p>Apakah anda yakin ingin menghapus Transaksi ini ?</p>
                 </AlertModal>
             </Card>
 
+            <div className="mt-10">
+                <div style={{ position: 'absolute', top: '-9999px', left: '-9999px' }} >
+                    <Invoice name={transaction?.user?.username} date={transaction?.createdAt} ppn={transaction?.ppn} product={transaction?.product?.title} quantity={transaction?.quantity}
+                        price={transaction?.grandtotal} transaction_type={transaction?.transaction_type} grandtotal={transaction?.grandtotal}
+                        ref={invoiceRef} />
+                </div>
+            </div>
         </DefaultLayout>
     )
 
